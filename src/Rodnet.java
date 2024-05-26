@@ -1,4 +1,4 @@
-public class Rodnet extends Pet implements Life{
+public class Rodnet extends Pet implements Life {
     private double seeds;
 
     public Rodnet() {
@@ -7,7 +7,7 @@ public class Rodnet extends Pet implements Life{
         this.seeds = Math.random()*(0.5-0.1)+0.1;
     }
 
-    public double getMeat(){
+    public double Get_food_demand_for_pets(){
         return seeds;
     }
 

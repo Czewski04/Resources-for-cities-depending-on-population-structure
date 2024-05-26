@@ -1,4 +1,4 @@
-public abstract class Pet {
+public abstract class Pet implements Get_food_demand_for_pets{
     protected int age;
     protected double water;
 

@@ -7,7 +7,7 @@ public class Dog extends Pet implements Life {
         this.meat = Math.random()*(5-1)+1;
     }
 
-    public double getMeat(){
+    public double Get_food_demand_for_pets(){
         return meat;
     }
 

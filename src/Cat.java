@@ -1,4 +1,4 @@
-public class Cat extends Pet implements Life{
+public class Cat extends Pet implements Life {
     private double meat;
 
     public Cat() {
@@ -7,7 +7,7 @@ public class Cat extends Pet implements Life{
         this.meat = Math.random()*(1-0.2)+0.2;
     }
 
-    public double getMeat(){
+    public double Get_food_demand_for_pets(){
         return meat;
     }
 

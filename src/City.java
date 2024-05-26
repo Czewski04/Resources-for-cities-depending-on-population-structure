@@ -107,7 +107,22 @@ public class City {
         }
     }
     public void calcualte_sum(){
-
+        for(int i=0; i<population; i++){
+            this.sum_of_potatoes += list_of_residents.get(i).getPotatoes();
+            this.sum_of_apples += list_of_residents.get(i).getApples();
+            this.sum_of_bread += list_of_residents.get(i).getBread();
+            this.sum_of_meat += list_of_residents.get(i).getMeat();
+            this.sum_of_cucumbers += list_of_residents.get(i).getCucumbers();
+            this.sum_of_tomatoes += list_of_residents.get(i).getTomatoes();
+            this.sum_of_water += list_of_residents.get(i).getWater();
+        }
+        for(int i=0; i<pets_population; i++){
+            this.sum_of_water += list_of_pets.get(i).getWater();
+            if(list_of_pets.get(i) instanceof Rodnet)
+                this.sum_of_seeds += list_of_pets.get(i).Get_food_demand_for_pets();
+            else
+                this.sum_of_meat += list_of_pets.get(i).Get_food_demand_for_pets();
+        }
     }
 
 }
