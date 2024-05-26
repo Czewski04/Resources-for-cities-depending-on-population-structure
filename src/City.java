@@ -1,3 +1,12 @@
+import Animals.Cat;
+import Animals.Dog;
+import Animals.Pet;
+import Animals.Rodnet;
+import Crops.Crops;
+import People.Man;
+import People.Person;
+import People.Woman;
+
 import java.util.ArrayList;
 
 public class City {

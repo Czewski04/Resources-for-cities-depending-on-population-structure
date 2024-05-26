@@ -1,3 +1,7 @@
+package Animals;
+
+import Interfaces.Life;
+
 public class Dog extends Pet implements Life {
     private double meat;
 

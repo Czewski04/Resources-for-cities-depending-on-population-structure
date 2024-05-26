@@ -1,4 +1,8 @@
-public abstract class Pet implements Get_food_demand_for_pets{
+package Animals;
+
+import Interfaces.Get_food_demand_for_pets;
+
+public abstract class Pet implements Get_food_demand_for_pets {
     protected int age;
     protected double water;
 

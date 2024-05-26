@@ -1,3 +1,5 @@
+package People;
+
 abstract public class Person {
     protected int age;
     protected double potatoes;

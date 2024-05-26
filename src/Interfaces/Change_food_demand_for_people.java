@@ -1,3 +1,5 @@
+package Interfaces;
+
 public interface Change_food_demand_for_people {
     public void change_potatoes_demand(double potatoes_demand);
     public void change_apples_demand(double apples_demand);

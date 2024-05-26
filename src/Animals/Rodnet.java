@@ -1,3 +1,7 @@
+package Animals;
+
+import Interfaces.Life;
+
 public class Rodnet extends Pet implements Life {
     private double seeds;
 
