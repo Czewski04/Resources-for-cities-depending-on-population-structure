@@ -1,5 +1,11 @@
-public class Cat implements Life{
+public class Cat extends Pet implements Life{
     private double meat;
+
+    public Cat() {
+        this.age = (int)Math.round((Math.random()*(20-1))+1);
+        this.water = Math.random()*(2-0.5)+0.5;
+        this.meat = Math.random()*(1-0.2)+0.2;
+    }
 
     public double getMeat(){
         return meat;

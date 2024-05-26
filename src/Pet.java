@@ -1,6 +1,6 @@
 public abstract class Pet {
-    private int age;
-    private double water;
+    protected int age;
+    protected double water;
 
     public int getAge() {
         return age;

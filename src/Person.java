@@ -1,12 +1,12 @@
 abstract public class Person {
-    private int age;
-    private double potatoes;
-    private double apples;
-    private double bread;
-    private double cucumbers;
-    private double tomatoes;
-    private double meat;
-    private double water;
+    protected int age;
+    protected double potatoes;
+    protected double apples;
+    protected double bread;
+    protected double cucumbers;
+    protected double tomatoes;
+    protected double meat;
+    protected double water;
 
     public int getAge() {
         return age;
