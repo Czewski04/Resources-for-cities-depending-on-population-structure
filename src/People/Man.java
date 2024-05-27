@@ -33,7 +33,7 @@ public class Man extends Person implements Change_food_demand_for_people, Life {
             this.tomatoes = Math.random()*(2);
             this.water = Math.random()*(28-7)+7;
         }
-        else if (age>70){
+        else{
             this.potatoes = (Math.random()*(1.5));
             this.apples = (Math.random()*(1.3));
             this.bread = (Math.random()*(1.3));
@@ -44,50 +44,44 @@ public class Man extends Person implements Change_food_demand_for_people, Life {
         }
     }
 
-    public void change_food_demand(double potatoes_demand, double apples_demand, double bread_demand, double cucumbers_demand, double tomatoes_demand, double meat_demand, double water_demand){
-        this.age = (int)Math.round((Math.random()*(100-1))+1);
+    public void change_food_demand(){
         if(age < 10){
-            potatoes_demand  = (Math.random()*(3));
-            apples_demand = Math.random();
-            bread_demand = (Math.random()*(4));
-            meat_demand = Math.random()*(12.5-4)+4;
-            cucumbers_demand = (Math.random()*(3.5));
-            tomatoes_demand = Math.random();
-            water_demand = Math.random()*(10-3.5)+3.5;
+            this.potatoes  = (Math.random()*(3));
+            this.apples = Math.random();
+            this.bread = (Math.random()*(4));
+            this.meat = Math.random()*(12.5-4)+4;
+            this.cucumbers = (Math.random()*(3.5));
+            this.meat = Math.random();
+            this.water = Math.random()*(10-3.5)+3.5;
         }
         else if(age < 18){
-            potatoes_demand  = (Math.random()*(3.5));
-            apples_demand = Math.random()*(12-3)+3;
-            bread_demand = (Math.random()*(6.5));
-            meat_demand = Math.random()*(15-3.5)+3.5;
-            cucumbers_demand = (Math.random()*(7));
-            tomatoes_demand = Math.random();
-            water_demand = Math.random()*(10-2)+2;
+            this.potatoes  = (Math.random()*(3.5));
+            this.apples = Math.random()*(12-3)+3;
+            this.bread = (Math.random()*(6.5));
+            this.meat = Math.random()*(15-3.5)+3.5;
+            this.cucumbers = (Math.random()*(7));
+            this.cucumbers = Math.random();
+            this.water = Math.random()*(10-2)+2;
         } else if (age < 70) {
-            potatoes_demand  = (Math.random()*(3));
-            apples_demand = Math.random();
-            bread_demand = (Math.random()*(4));
-            meat_demand = Math.random()*(12.5-4)+4;
-            cucumbers_demand = (Math.random()*(3.5));
-            tomatoes_demand = Math.random();
-            water_demand = Math.random()*(22-6)+6;
+            this.potatoes  = (Math.random()*(3));
+            this.apples = Math.random();
+            this.bread = (Math.random()*(4));
+            this.meat = Math.random()*(12.5-4)+4;
+            this.cucumbers = (Math.random()*(3.5));
+            this.cucumbers = Math.random();
+            this.water = Math.random()*(22-6)+6;
         }
-        else if (age >=70){
-            potatoes_demand  = (Math.random()*(3));
-            apples_demand = Math.random();
-            bread_demand = (Math.random()*(4));
-            meat_demand = Math.random();
-            cucumbers_demand = (Math.random()*(2.5));
-            tomatoes_demand = Math.random();
-            water_demand = Math.random()*(15-4)+4;
+        else{
+            this.potatoes  = (Math.random()*(3));
+            this.apples = Math.random();
+            this.bread = (Math.random()*(4));
+            this.meat = Math.random();
+            this.cucumbers = (Math.random()*(2.5));
+            this.cucumbers = Math.random();
+            this.water = Math.random()*(15-4)+4;
         }
     }
 
-
-    @Override
-    public void add_age() {
-        super.add_age();
-    }
 
     @Override
     public void born() {
