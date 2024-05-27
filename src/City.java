@@ -1,13 +1,14 @@
 import Animals.Cat;
 import Animals.Dog;
 import Animals.Pet;
-import Animals.Rodnet;
+import Animals.Rodent;
 import Crops.Crops;
 import People.Man;
 import People.Person;
 import People.Woman;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class City {
     private String name;
@@ -24,6 +25,7 @@ public class City {
     private double sum_of_meat;
     private double sum_of_water;
     private double sum_of_seeds;
+    private Crops crops;
 
     public City(String name, int population) {
         this.name = name;
@@ -93,30 +95,30 @@ public class City {
 
         int men = (int) Math.round(this.population/(Math.random()*(people_max-people_min))+people_min);
         int women = this.population-men;
-        for(int i=0; i<men; i++){
+        for(int i = 0; i < men; i++){
             this.list_of_residents.add(new Man());
         }
 
-        for(int i=0; i<women; i++){
+        for(int i = 0; i < women; i++){
             this.list_of_residents.add(new Woman());
         }
 
         int dogs = (int) Math.round(this.population/(Math.random()*(pet_max-pet_min))+pet_min);
         int cats = (int) Math.round((pets_population-dogs)/(Math.random()*(pet_max-pet_min))+pet_min);
-        int rodnets = pets_population-dogs-cats;
+        int rodents = pets_population-dogs-cats;
 
-        for(int i=0; i<dogs; i++){
+        for(int i = 0; i < dogs; i++){
             this.list_of_pets.add(new Dog());
         }
-        for(int i=0; i<cats; i++){
+        for(int i = 0; i < cats; i++){
             this.list_of_pets.add(new Cat());
         }
-        for(int i=0; i<rodnets; i++){
-            this.list_of_pets.add(new Rodnet());
+        for(int i = 0; i < rodents; i++){
+            this.list_of_pets.add(new Rodent());
         }
     }
-    public void calcualte_sum(){
-        for(int i=0; i<population; i++){
+    public void calculate_sum(){
+        for(int i = 0; i < population; i++){
             this.sum_of_potatoes += list_of_residents.get(i).getPotatoes();
             this.sum_of_apples += list_of_residents.get(i).getApples();
             this.sum_of_bread += list_of_residents.get(i).getBread();
@@ -125,12 +127,18 @@ public class City {
             this.sum_of_tomatoes += list_of_residents.get(i).getTomatoes();
             this.sum_of_water += list_of_residents.get(i).getWater();
         }
-        for(int i=0; i<pets_population; i++){
+        for(int i = 0; i < pets_population; i++){
             this.sum_of_water += list_of_pets.get(i).getWater();
-            if(list_of_pets.get(i) instanceof Rodnet)
+            if(list_of_pets.get(i) instanceof Rodent)
                 this.sum_of_seeds += list_of_pets.get(i).Get_food_demand_for_pets();
             else
                 this.sum_of_meat += list_of_pets.get(i).Get_food_demand_for_pets();
+        }
+    }
+
+    public void calculate_crops(ArrayList<Crops> crops){
+        for(Crops crop : crops){
+            this.list_of_crops.add(new Crops());
         }
     }
 
