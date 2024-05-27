@@ -2,9 +2,8 @@ package Crops;
 
 import Interfaces.Calculate_crops_parameters;
 
-public class Animal_breeding extends Crops implements Calculate_crops_parameters {
-
-    Animal_breeding(){
+public class Cucumber_crops extends Crops implements Calculate_crops_parameters {
+    Cucumber_crops(){
         this.area_factor = 0.5;
         this.water_factor = 10;
     }
