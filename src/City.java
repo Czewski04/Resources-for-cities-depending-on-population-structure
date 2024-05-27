@@ -1,11 +1,17 @@
 import Animals.Cat;
 import Animals.Dog;
 import Animals.Pet;
-import Animals.Rodnet;
+import Animals.Rodent;
 import Crops.Crops;
 import People.Man;
 import People.Person;
 import People.Woman;
+import Crops.Apple_crops;
+import Crops.Cucumber_crops;
+import Crops.Potato_crops;
+import Crops.Animal_breeding;
+import Crops.Tomato_crops;
+import Crops.Wheat_crops;
 
 import java.util.ArrayList;
 
@@ -120,7 +126,7 @@ public class City {
             this.list_of_pets.add(new Cat());
         }
         for(int i=0; i<rodnets; i++){
-            this.list_of_pets.add(new Rodnet());
+            this.list_of_pets.add(new Rodent());
         }
     }
 
@@ -138,7 +144,7 @@ public class City {
 
         //zliczanie zapotrzebowania zwierząt
         for(int i=0; i<pets_population; i++){
-            if(list_of_pets.get(i) instanceof Rodnet){
+            if(list_of_pets.get(i) instanceof Rodent){
                 this.sum_of_seeds += list_of_pets.get(i).Get_food_demand_for_pets();
                 this.sum_of_wheat += list_of_pets.get(i).Get_food_demand_for_pets();
             }
@@ -164,6 +170,12 @@ public class City {
 
     public void generating_crops(){
         // tutaj pola muszą byc dodawane do listy w takiej kolejnosci w jakiej są w funkcji poniżej: cultivating_fields()
+        list_of_crops.add(new Potato_crops());
+        list_of_crops.add(new Apple_crops());
+        list_of_crops.add(new Animal_breeding());
+        list_of_crops.add(new Cucumber_crops());
+        list_of_crops.add(new Tomato_crops());
+        list_of_crops.add(new Wheat_crops());
     }
 
     public void cultivating_fields(){
