@@ -130,7 +130,7 @@ public class City {
         }
     }
 
-    public void calcualte_sum_without_water(){
+    public void calcualte_sum_without_water(){ //obliczanie zapotrzebowania na surowece (bez wody)
         //zliczanie zapotrzebowania populacji
         for(int i=0; i<population; i++){
             this.sum_of_potatoes += list_of_residents.get(i).getPotatoes();
@@ -153,7 +153,7 @@ public class City {
         }
     }
 
-    public void calculate_sum_of_water(){
+    public void calculate_sum_of_water(){ //obliczanie zapotrzebowania na wode wraz z polami uprawnymi
         //zliczanie zapotrzebowania pól
         for(int i=0; i<list_of_crops.size(); i++){
             this.sum_of_water += list_of_crops.get(i).getWater_demand();
@@ -169,7 +169,7 @@ public class City {
     }
 
     public void generating_crops(){
-        // tutaj pola muszą byc dodawane do listy w takiej kolejnosci w jakiej są w funkcji poniżej: cultivating_fields()
+        // dodawanie pól każdego rodzaju do miasta
         list_of_crops.add(new Potato_crops());
         list_of_crops.add(new Apple_crops());
         list_of_crops.add(new Animal_breeding());
@@ -179,6 +179,7 @@ public class City {
     }
 
     public void cultivating_fields(){
+        //przekazywanie zapotrzebowania do pól uprawnych
         list_of_crops.get(0).calculate_crop_parameters(sum_of_potatoes);
         list_of_crops.get(1).calculate_crop_parameters(sum_of_apples);
         list_of_crops.get(2).calculate_crop_parameters(sum_of_meat);
