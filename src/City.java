@@ -24,6 +24,7 @@ public class City {
     private double sum_of_meat;
     private double sum_of_water;
     private double sum_of_seeds;
+    private double sum_of_wheat;
 
     public City(String name, int population) {
         this.name = name;
@@ -83,6 +84,10 @@ public class City {
         return sum_of_water;
     }
 
+    public double getSum_of_wheat(){
+        return sum_of_wheat;
+    }
+
     public void generate_residents(){
         double people_max = 3.5;
         double people_min = 1.4;
@@ -118,31 +123,56 @@ public class City {
             this.list_of_pets.add(new Rodnet());
         }
     }
-    public void calcualte_sum(){
+
+    public void calcualte_sum_without_water(){
         //zliczanie zapotrzebowania populacji
         for(int i=0; i<population; i++){
             this.sum_of_potatoes += list_of_residents.get(i).getPotatoes();
             this.sum_of_apples += list_of_residents.get(i).getApples();
-            this.sum_of_bread += list_of_residents.get(i).getBread();
             this.sum_of_meat += list_of_residents.get(i).getMeat();
             this.sum_of_cucumbers += list_of_residents.get(i).getCucumbers();
             this.sum_of_tomatoes += list_of_residents.get(i).getTomatoes();
-            this.sum_of_water += list_of_residents.get(i).getWater();
+            this.sum_of_bread += list_of_residents.get(i).getBread();
+            this.sum_of_wheat += list_of_residents.get(i).getBread(); //z 1kg pszenicy mamy +- 1kg chleba
         }
 
         //zliczanie zapotrzebowania zwierząt
         for(int i=0; i<pets_population; i++){
-            this.sum_of_water += list_of_pets.get(i).getWater();
-            if(list_of_pets.get(i) instanceof Rodnet)
+            if(list_of_pets.get(i) instanceof Rodnet){
                 this.sum_of_seeds += list_of_pets.get(i).Get_food_demand_for_pets();
+                this.sum_of_wheat += list_of_pets.get(i).Get_food_demand_for_pets();
+            }
             else
                 this.sum_of_meat += list_of_pets.get(i).Get_food_demand_for_pets();
         }
+    }
 
+    public void calculate_sum_of_water(){
         //zliczanie zapotrzebowania pól
         for(int i=0; i<list_of_crops.size(); i++){
             this.sum_of_water += list_of_crops.get(i).getWater_demand();
         }
+        //woda dla zwierzat
+        for(int i=0; i<pets_population; i++){
+            this.sum_of_water += list_of_pets.get(i).getWater();
+        }
+        //woda dla ludzi
+        for(int i=0; i<population; i++){
+            this.sum_of_water += list_of_residents.get(i).getWater();
+        }
+    }
+
+    public void generating_crops(){
+        // tutaj pola muszą byc dodawane do listy w takiej kolejnosci w jakiej są w funkcji poniżej: cultivating_fields()
+    }
+
+    public void cultivating_fields(){
+        list_of_crops.get(0).calculate_crop_parameters(sum_of_potatoes);
+        list_of_crops.get(1).calculate_crop_parameters(sum_of_apples);
+        list_of_crops.get(2).calculate_crop_parameters(sum_of_meat);
+        list_of_crops.get(3).calculate_crop_parameters(sum_of_cucumbers);
+        list_of_crops.get(4).calculate_crop_parameters(sum_of_tomatoes);
+        list_of_crops.get(5).calculate_crop_parameters(sum_of_wheat);
     }
 
 }

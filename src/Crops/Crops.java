@@ -9,4 +9,9 @@ public class Crops {
     public double getWater_demand() {
         return water_demand;
     }
+
+    public void calculate_crop_parameters(double sum_of_food) {
+        this.crop_area = area_factor * sum_of_food;
+        this.water_demand = crop_area * water_factor;
+    }
 }
