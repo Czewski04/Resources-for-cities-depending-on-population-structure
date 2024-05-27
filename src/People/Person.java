@@ -43,6 +43,6 @@ abstract public class Person {
     }
 
     public void add_age(){
-
+        this.age += 1;
     }
 }
