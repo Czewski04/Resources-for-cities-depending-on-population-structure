@@ -188,4 +188,85 @@ public class City {
         list_of_crops.get(5).calculate_crop_parameters(sum_of_wheat);
     }
 
+    public void death(double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance){   //losowanie śmierci
+        for(int i=0; i<list_of_residents.size(); i++){  //losowanie śmierci dla ludzi
+            if(list_of_residents.get(i).getAge()<20){
+                if((Math.random()*(1000))/10<child_death_chance){
+                    list_of_residents.remove(i);
+                }
+            }
+            if(list_of_residents.get(i).getAge()<70){
+                if((Math.random()*(1000))/10<adult_death_chance){
+                    list_of_residents.remove(i);
+                }
+            }
+            if(list_of_residents.get(i).getAge()<90){
+                if((Math.random()*(1000))/10<senior_death_chance){
+                    list_of_residents.remove(i);
+                }
+            }
+            else {
+                if ((Math.random() * (1000)) / 10 < old_death_chance) {
+                    list_of_residents.remove(i);
+                }
+            }
+        }
+        this.population = list_of_residents.size();
+
+        for(int i=0; i<list_of_pets.size(); i++){   //losowanie śmierci dla zwierząt
+            if(list_of_pets.get(i).getAge()<2){
+                if((Math.random()*(1000))/10<child_death_chance){
+                    list_of_pets.remove(i);
+                }
+            }
+            if(list_of_pets.get(i).getAge()<12){
+                if((Math.random()*(1000))/10<adult_death_chance){
+                    list_of_pets.remove(i);
+                }
+            }if(list_of_pets.get(i).getAge()<16){
+                if((Math.random()*(1000))/10<senior_death_chance){
+                    list_of_pets.remove(i);
+                }
+            }
+            else {
+                if ((Math.random() * (1000)) / 10 < old_death_chance) {
+                    list_of_pets.remove(i);
+                }
+            }
+        }
+        this.pets_population = list_of_pets.size();
+
+    }
+
+    public void born(double birht_rate, double animal_birth_rate){
+        int number_of_births = (int)Math.round(birht_rate*this.population/100);
+        int men = Math.round(number_of_births*((float)(Math.round(Math.random() * (60 - 40) + 40)) /100));
+        int women = number_of_births-men;
+
+        for(int i=0; i<men; i++){
+            list_of_residents.add(new Man(0));
+        }
+        for(int i=0; i<women; i++){
+            list_of_residents.add(new Woman(0));
+        }
+        this.population = list_of_residents.size();
+
+        int number_of_animal_births = (int)Math.round(animal_birth_rate*this.pets_population/100);
+        int cats = Math.round(number_of_animal_births*((float)(Math.round(Math.random() * (20 - 40) + 40)) /100));
+        number_of_animal_births = number_of_animal_births - cats;
+        int dogs = Math.round(number_of_animal_births*((float)(Math.round(Math.random() * (60 - 40) + 40)) /100));
+        int rodnets = number_of_animal_births-dogs;
+
+        for(int i=0; i<cats; i++){
+            list_of_pets.add(new Cat(0));
+        }
+        for(int i=0; i<dogs; i++){
+            list_of_pets.add(new Dog(0));
+        }
+        for(int i=0; i<rodnets; i++){
+            list_of_pets.add(new Rodent(0));
+        }
+        this.pets_population = list_of_pets.size();
+    }
+
 }

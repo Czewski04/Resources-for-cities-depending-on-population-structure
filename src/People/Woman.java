@@ -1,9 +1,8 @@
 package People;
 
 import Interfaces.Change_food_demand_for_people;
-import Interfaces.Life;
 
-public class Woman extends Person implements Change_food_demand_for_people, Life {
+public class Woman extends Person implements Change_food_demand_for_people {
 
     public Woman(){
         this.age = (int)Math.round((Math.random()*(100-1))+1);
@@ -44,6 +43,17 @@ public class Woman extends Person implements Change_food_demand_for_people, Life
         }
     }
 
+    public Woman(int age){
+        this.age = age;
+        this.potatoes = Math.random();
+        this.apples = Math.random();
+        this.bread = (Math.random()*(1.5));
+        this.meat = Math.random();
+        this.cucumbers = (Math.random()*(0.5));
+        this.tomatoes = Math.random();
+        this.water = Math.random()*(14-3.5)+3.5;
+    }
+
     public void change_food_demand(){
         this.age = (int)Math.round((Math.random()*(100-1))+1);
         if(age < 10){
@@ -81,16 +91,5 @@ public class Woman extends Person implements Change_food_demand_for_people, Life
             this.tomatoes = Math.random();
             this.water = Math.random()*(15-4)+4;
         }
-    }
-
-
-    @Override
-    public void born() {
-
-    }
-
-    @Override
-    public void death(int age) {
-
     }
 }

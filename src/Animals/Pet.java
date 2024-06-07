@@ -15,7 +15,7 @@ public abstract class Pet implements Get_food_demand_for_pets {
     }
 
     public void add_age(){
-
+        this.age +=1;
     }
 
 }
