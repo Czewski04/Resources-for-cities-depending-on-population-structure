@@ -1,6 +1,9 @@
 package Animals;
 
-public class Cat extends Pet {
+import Interfaces.Get_food_demand_for_pets;
+import Interfaces.Set_food_demand_for_pets;
+
+public class Cat extends Pet implements Get_food_demand_for_pets, Set_food_demand_for_pets {
     private double meat;
 
     public Cat() {
@@ -17,7 +20,8 @@ public class Cat extends Pet {
 
     public double Get_food_demand_for_pets(){ return meat; }
 
-    public void change_meat_demand(double meat){
-
+    public void set_food_demand_for_pets(){
+        this.water = Math.random()*(2-0.5)+0.5;
+        this.meat = Math.random()*(1-0.2)+0.2;
     }
 }

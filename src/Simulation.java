@@ -33,12 +33,14 @@ public class Simulation {
                 show_food_demand(list_of_cities.get(i));
             }
 
+
             System.out.println("Jaki okres czasu chcesz dodać: ");
             progress = reading.nextInt();
 
             this.time += progress;
             for(int i=0; i<this.list_of_cities.size(); i++){
-                list_of_cities.get(i).Time();
+                list_of_cities.get(i).Clear();
+                list_of_cities.get(i).Time(progress);
             }
 
         }

@@ -1,6 +1,8 @@
 package People;
 
-abstract public class Person {
+import Interfaces.Set_food_demand_for_people;
+
+abstract public class Person implements Set_food_demand_for_people {
     protected int age;
     protected double potatoes;
     protected double apples;

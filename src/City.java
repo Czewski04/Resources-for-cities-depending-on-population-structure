@@ -237,12 +237,12 @@ public class City {
                     list_of_residents.remove(i);
                 }
             }
-            if(list_of_residents.get(i).getAge()<70){
+            else if(list_of_residents.get(i).getAge()<70){
                 if((Math.random()*(1000))/10<this.adult_death_chance){
                     list_of_residents.remove(i);
                 }
             }
-            if(list_of_residents.get(i).getAge()<90){
+            else if(list_of_residents.get(i).getAge()<90){
                 if((Math.random()*(1000))/10<this.senior_death_chance){
                     list_of_residents.remove(i);
                 }
@@ -261,11 +261,12 @@ public class City {
                     list_of_pets.remove(i);
                 }
             }
-            if(list_of_pets.get(i).getAge()<12){
+            else if(list_of_pets.get(i).getAge()<12){
                 if((Math.random()*(1000))/10 < this.adult_death_chance){
                     list_of_pets.remove(i);
                 }
-            }if(list_of_pets.get(i).getAge()<16){
+            }
+            else if(list_of_pets.get(i).getAge()<16){
                 if((Math.random()*(1000))/10 < this.senior_death_chance){
                     list_of_pets.remove(i);
                 }
@@ -314,22 +315,41 @@ public class City {
     public void Start(){
         generate_residents();
         generating_crops();
-    }
-
-    public void Time(){
-        for(Person resident : list_of_residents){
-            resident.add_age();
-        }
-
-        for(Pet pet : list_of_pets){
-            pet.add_age();
-        }
-        born();
-        death();
         calcualte_sum_without_water();
         cultivating_fields();
         calculate_sum_of_water();
-        cultivating_fields();
+    }
+
+    public void Time(int progress){
+        for(int i=0; i<progress; i++){
+            for(Person resident : list_of_residents){
+                resident.add_age();
+                resident.set_food_demand();
+            }
+
+            for(Pet pet : list_of_pets){
+                pet.add_age();
+                pet.set_food_demand_for_pets();
+            }
+
+            born();
+            death();
+            calcualte_sum_without_water();
+            cultivating_fields();
+            calculate_sum_of_water();
+        }
+    }
+
+    public void Clear(){
+        sum_of_apples = 0;
+        sum_of_bread = 0;
+        sum_of_cucumbers = 0;
+        sum_of_meat = 0;
+        sum_of_potatoes = 0;
+        sum_of_seeds = 0;
+        sum_of_tomatoes = 0;
+        sum_of_water = 0;
+        sum_of_wheat = 0;
     }
 
 }
