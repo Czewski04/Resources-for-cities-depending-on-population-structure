@@ -15,6 +15,7 @@ import Crops.Wheat_crops;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class City {
     private String name;
@@ -49,6 +50,28 @@ public class City {
         this.old_death_chance = old_death_chance;
         this.birth_rate = birth_rate;
         this.animal_birth_rate = animal_birth_rate;
+    }
+
+    public static City getting_city_data() {
+        Scanner reading_data = new Scanner(System.in);
+        System.out.println("Podaj nazwę miasta: ");
+        String nazwa_miasta = reading_data.nextLine();
+
+        System.out.println("Podaj początkową populację miasta: ");
+        int population = reading_data.nextInt();
+
+        System.out.println("Podaj kolejno procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
+        double child_death_chance = reading_data.nextDouble();
+        double adult_death_chance = reading_data.nextDouble();
+        double senoir_death_chance = reading_data.nextDouble();
+        double old_death_chance = reading_data.nextDouble();
+
+        System.out.println("Podaj kolejno współczynnik urodzień ludzi na 100 mieszkańców oraz współczynnik urodzień zwierząt na 100 mieszkańców ");
+        double birth_rate = reading_data.nextDouble();
+        double animal_birth_rate = reading_data.nextDouble();
+
+        City city = new City(nazwa_miasta, population, child_death_chance, adult_death_chance, senoir_death_chance, old_death_chance, birth_rate, animal_birth_rate);
+        return city;
     }
 
     public ArrayList<Crops> getList_of_crops() {
@@ -286,6 +309,7 @@ public class City {
         generate_residents();
         generating_crops();
     }
+
     public void Time(){
         for(Person resident : list_of_residents){
             resident.add_age();
@@ -297,6 +321,7 @@ public class City {
         born();
         death();
         calcualte_sum_without_water();
+        cultivating_fields();
         calculate_sum_of_water();
         cultivating_fields();
     }
