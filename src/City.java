@@ -39,6 +39,7 @@ public class City {
     private double old_death_chance;
     private double birth_rate;
     private double animal_birth_rate;
+    private double crop_area;
 
     public City(String name, int population, double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance, double birth_rate, double animal_birth_rate) {
         this.name = name;
@@ -94,6 +95,10 @@ public class City {
         return population;
     }
 
+    public double getCrop_area() {
+        return crop_area;
+    }
+
     public double getSum_of_apples() {
         return sum_of_apples;
     }
@@ -130,6 +135,7 @@ public class City {
         return sum_of_wheat;
     }
 
+
     public void generate_residents(){
         double people_max = 3.5;
         double people_min = 1.4;
@@ -142,11 +148,11 @@ public class City {
         int women = this.population-men;
 
 
-        for(int i=0; i<men; i++){
+        for(int i = 0; i < men; i++){
             this.list_of_residents.add(new Man());
         }
 
-        for(int i=0; i<women; i++){
+        for(int i = 0; i < women; i++){
             this.list_of_residents.add(new Woman());
         }
 
@@ -155,20 +161,20 @@ public class City {
         int cats = (int) Math.round((pets_population-dogs)/((Math.random()*(pet_max-pet_min))+pet_min));
         int rodnets = pets_population-dogs-cats;
 
-        for(int i=0; i<dogs; i++){
+        for(int i = 0; i < dogs; i++){
             this.list_of_pets.add(new Dog());
         }
-        for(int i=0; i<cats; i++){
+        for(int i = 0; i < cats; i++){
             this.list_of_pets.add(new Cat());
         }
-        for(int i=0; i<rodnets; i++){
+        for(int i = 0; i < rodnets; i++){
             this.list_of_pets.add(new Rodent());
         }
     }
 
     public void calcualte_sum_without_water(){ //obliczanie zapotrzebowania na surowece (bez wody)
         //zliczanie zapotrzebowania populacji
-        for(int i=0; i<population; i++){
+        for(int i = 0; i < population; i++){
             this.sum_of_potatoes += list_of_residents.get(i).getPotatoes();
             this.sum_of_apples += list_of_residents.get(i).getApples();
             this.sum_of_meat += list_of_residents.get(i).getMeat();
@@ -179,7 +185,7 @@ public class City {
         }
 
         //zliczanie zapotrzebowania zwierząt
-        for(int i=0; i<pets_population; i++){
+        for(int i = 0; i < pets_population; i++){
             if(list_of_pets.get(i) instanceof Rodent){
                 this.sum_of_seeds += list_of_pets.get(i).Get_food_demand_for_pets();
                 this.sum_of_wheat += list_of_pets.get(i).Get_food_demand_for_pets();
@@ -191,15 +197,15 @@ public class City {
 
     public void calculate_sum_of_water(){ //obliczanie zapotrzebowania na wode wraz z polami uprawnymi
         //zliczanie zapotrzebowania pól
-        for(int i=0; i<list_of_crops.size(); i++){
+        for(int i = 0; i < list_of_crops.size(); i++){
             this.sum_of_water += list_of_crops.get(i).getWater_demand();
         }
         //woda dla zwierzat
-        for(int i=0; i<pets_population; i++){
+        for(int i = 0; i < pets_population; i++){
             this.sum_of_water += list_of_pets.get(i).getWater();
         }
         //woda dla ludzi
-        for(int i=0; i<population; i++){
+        for(int i = 0; i < population; i++){
             this.sum_of_water += list_of_residents.get(i).getWater();
         }
     }
@@ -225,7 +231,7 @@ public class City {
     }
 
     public void death(){   //losowanie śmierci
-        for(int i=0; i<list_of_residents.size(); i++){  //losowanie śmierci dla ludzi
+        for(int i = 0; i < list_of_residents.size(); i++){  //losowanie śmierci dla ludzi
             if(list_of_residents.get(i).getAge()<20){
                 if((Math.random()*(1000))/10<this.child_death_chance){
                     list_of_residents.remove(i);
@@ -249,7 +255,7 @@ public class City {
         }
         this.population = list_of_residents.size();
 
-        for(int i=0; i<list_of_pets.size(); i++){   //losowanie śmierci dla zwierząt
+        for(int i = 0; i < list_of_pets.size(); i++){   //losowanie śmierci dla zwierząt
             if(list_of_pets.get(i).getAge()<2){
                 if((Math.random()*(1000))/10 < this.child_death_chance){
                     list_of_pets.remove(i);
@@ -279,10 +285,10 @@ public class City {
         int men = Math.round(number_of_births*((float)(Math.round(Math.random() * (60 - 40) + 40)) /100));
         int women = number_of_births-men;
 
-        for(int i=0; i<men; i++){
+        for(int i = 0; i < men; i++){
             list_of_residents.add(new Man(0));
         }
-        for(int i=0; i<women; i++){
+        for(int i = 0; i < women; i++){
             list_of_residents.add(new Woman(0));
         }
         this.population = list_of_residents.size();
@@ -293,13 +299,13 @@ public class City {
         int dogs = Math.round(number_of_animal_births*((float)(Math.round(Math.random() * (60 - 40) + 40)) /100));
         int rodnets = number_of_animal_births-dogs;
 
-        for(int i=0; i<cats; i++){
+        for(int i = 0; i < cats; i++){
             list_of_pets.add(new Cat(0));
         }
-        for(int i=0; i<dogs; i++){
+        for(int i = 0; i < dogs; i++){
             list_of_pets.add(new Dog(0));
         }
-        for(int i=0; i<rodnets; i++){
+        for(int i = 0; i < rodnets; i++){
             list_of_pets.add(new Rodent(0));
         }
         this.pets_population = list_of_pets.size();

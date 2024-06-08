@@ -6,7 +6,7 @@ public class Simulation {
     public ArrayList<City> list_of_cities = new ArrayList<City>();
 
     public void show_crop_area(City city){
-
+        System.out.println("Potrzebna ilość powierzchni pól uprawnych: " + city.getCrop_area());
     }
 
 
@@ -29,6 +29,7 @@ public class Simulation {
             for(int i=0; i<this.list_of_cities.size(); i++){
                 System.out.println("Oto statystyki miasta " + list_of_cities.get(i).getName());
                 System.out.println("Populacja " + list_of_cities.get(i).getPopulation());
+                show_crop_area(list_of_cities.get(i));
                 show_food_demand(list_of_cities.get(i));
             }
 

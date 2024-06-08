@@ -6,6 +6,10 @@ public class Crops {
     protected double area_factor;
     protected double water_factor;
 
+    public double getCrop_area() {
+        return crop_area;
+    }
+
     public double getWater_demand() {
         return water_demand;
     }
