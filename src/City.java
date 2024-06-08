@@ -281,6 +281,11 @@ public class City {
         }
         this.pets_population = list_of_pets.size();
     }
+
+    public void Start(){
+        generate_residents();
+        generating_crops();
+    }
     public void Time(){
         for(Person resident : list_of_residents){
             resident.add_age();
@@ -293,6 +298,7 @@ public class City {
         death();
         calcualte_sum_without_water();
         calculate_sum_of_water();
+        cultivating_fields();
     }
 
 }
