@@ -10,15 +10,15 @@ public class Simulation {
     public void show_crop_area(City city) {
         for (Crops crop : city.getList_of_crops()) {
             if (crop instanceof Potato_crops) {
-                System.out.println("Potrzebna ilość powierzchni pól uprawnych na ziemniaki: " + crop.getCrop_area());
+                System.out.println("Potrzebna ilość pól uprawnych na ziemniaki: " + crop.getCrop_area());
             } else if (crop instanceof Apple_crops) {
-                System.out.println("Potrzebna ilość powierzchni pól uprawnych na jabłka: " + crop.getCrop_area());
+                System.out.println("Potrzebna ilość pól uprawnych na jabłka: " + crop.getCrop_area());
             } else if (crop instanceof Wheat_crops) {
-                System.out.println("Potrzebna ilość powierzchni pól uprawnych na zboże: " + crop.getCrop_area());
+                System.out.println("Potrzebna ilośś pól uprawnych na zboże: " + crop.getCrop_area());
             } else if (crop instanceof Cucumber_crops) {
-                System.out.println("Potrzebna ilość powierzchni pól uprawnych na ogórki: " + crop.getCrop_area());
+                System.out.println("Potrzebna ilość pól uprawnych na ogórki: " + crop.getCrop_area());
             } else if (crop instanceof Tomato_crops) {
-                System.out.println("Potrzebna ilość powierzchni pól uprawnych na pomidory: " + crop.getCrop_area());
+                System.out.println("Potrzebna ilość pól uprawnych na pomidory: " + crop.getCrop_area());
             } else if (crop instanceof Animal_breeding) {
                 System.out.println("Potrzebna ilość powierzchni na hodowlę zwierząt: " + crop.getCrop_area());
             }
@@ -42,7 +42,7 @@ public class Simulation {
         Scanner reading = new Scanner(System.in);
         int progress = 0;
         while (true){
-            for(int i=0; i<this.list_of_cities.size(); i++){
+            for(int i = 0; i < this.list_of_cities.size(); i++){
                 System.out.println("Oto statystyki miasta " + list_of_cities.get(i).getName());
                 System.out.println("Populacja " + list_of_cities.get(i).getPopulation());
                 show_crop_area(list_of_cities.get(i));
@@ -54,7 +54,7 @@ public class Simulation {
             progress = reading.nextInt();
 
             this.time += progress;
-            for(int i=0; i<this.list_of_cities.size(); i++){
+            for(int i = 0; i < this.list_of_cities.size(); i++){
                 list_of_cities.get(i).Clear();
                 list_of_cities.get(i).Time(progress);
             }
