@@ -39,7 +39,6 @@ public class City {
     private double old_death_chance;
     private double birth_rate;
     private double animal_birth_rate;
-    private double crop_area;
 
     public City(String name, int population, double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance, double birth_rate, double animal_birth_rate) {
         this.name = name;
@@ -93,10 +92,6 @@ public class City {
 
     public int getPopulation() {
         return population;
-    }
-
-    public double getCrop_area() {
-        return crop_area;
     }
 
     public double getSum_of_apples() {

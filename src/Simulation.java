@@ -1,3 +1,5 @@
+import Crops.Crops;
+import Crops.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,8 +7,22 @@ public class Simulation {
     public int time;
     public ArrayList<City> list_of_cities = new ArrayList<City>();
 
-    public void show_crop_area(City city){
-        System.out.println("Potrzebna ilość powierzchni pól uprawnych: " + city.getCrop_area());
+    public void show_crop_area(City city) {
+        for (Crops crop : city.getList_of_crops()) {
+            if (crop instanceof Potato_crops) {
+                System.out.println("Potrzebna ilość powierzchni pól uprawnych na ziemniaki: " + crop.getCrop_area());
+            } else if (crop instanceof Apple_crops) {
+                System.out.println("Potrzebna ilość powierzchni pól uprawnych na jabłka: " + crop.getCrop_area());
+            } else if (crop instanceof Wheat_crops) {
+                System.out.println("Potrzebna ilość powierzchni pól uprawnych na zboże: " + crop.getCrop_area());
+            } else if (crop instanceof Cucumber_crops) {
+                System.out.println("Potrzebna ilość powierzchni pól uprawnych na ogórki: " + crop.getCrop_area());
+            } else if (crop instanceof Tomato_crops) {
+                System.out.println("Potrzebna ilość powierzchni pól uprawnych na pomidory: " + crop.getCrop_area());
+            } else if (crop instanceof Animal_breeding) {
+                System.out.println("Potrzebna ilość powierzchni na hodowlę zwierząt: " + crop.getCrop_area());
+            }
+        }
     }
 
 
