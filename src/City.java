@@ -281,5 +281,18 @@ public class City {
         }
         this.pets_population = list_of_pets.size();
     }
+    public void Time(){
+        for(Person resident : list_of_residents){
+            resident.add_age();
+        }
+
+        for(Pet pet : list_of_pets){
+            pet.add_age();
+        }
+        born();
+        death();
+        calcualte_sum_without_water();
+        calculate_sum_of_water();
+    }
 
 }
