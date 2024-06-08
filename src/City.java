@@ -14,6 +14,7 @@ import Crops.Tomato_crops;
 import Crops.Wheat_crops;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class City {
     private String name;
@@ -31,11 +32,23 @@ public class City {
     private double sum_of_water;
     private double sum_of_seeds;
     private double sum_of_wheat;
+    private double child_death_chance;
+    private double adult_death_chance;
+    private double senior_death_chance;
+    private double old_death_chance;
+    private double birth_rate;
+    private double animal_birth_rate;
 
-    public City(String name, int population) {
+    public City(String name, int population, double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance, double birth_rate, double animal_birth_rate) {
         this.name = name;
         this.population = population;
         this.pets_population = (int) Math.round(population/((Math.random()*(10-2))+2));
+        this.child_death_chance = child_death_chance;
+        this.adult_death_chance = adult_death_chance;
+        this.senior_death_chance = senior_death_chance;
+        this.old_death_chance = old_death_chance;
+        this.birth_rate = birth_rate;
+        this.animal_birth_rate = animal_birth_rate;
     }
 
     public ArrayList<Crops> getList_of_crops() {
@@ -188,25 +201,25 @@ public class City {
         list_of_crops.get(5).calculate_crop_parameters(sum_of_wheat);
     }
 
-    public void death(double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance){   //losowanie śmierci
+    public void death(){   //losowanie śmierci
         for(int i=0; i<list_of_residents.size(); i++){  //losowanie śmierci dla ludzi
             if(list_of_residents.get(i).getAge()<20){
-                if((Math.random()*(1000))/10<child_death_chance){
+                if((Math.random()*(1000))/10<this.child_death_chance){
                     list_of_residents.remove(i);
                 }
             }
             if(list_of_residents.get(i).getAge()<70){
-                if((Math.random()*(1000))/10<adult_death_chance){
+                if((Math.random()*(1000))/10<this.adult_death_chance){
                     list_of_residents.remove(i);
                 }
             }
             if(list_of_residents.get(i).getAge()<90){
-                if((Math.random()*(1000))/10<senior_death_chance){
+                if((Math.random()*(1000))/10<this.senior_death_chance){
                     list_of_residents.remove(i);
                 }
             }
             else {
-                if ((Math.random() * (1000)) / 10 < old_death_chance) {
+                if ((Math.random() * (1000)) / 10 < this.old_death_chance) {
                     list_of_residents.remove(i);
                 }
             }
@@ -215,21 +228,21 @@ public class City {
 
         for(int i=0; i<list_of_pets.size(); i++){   //losowanie śmierci dla zwierząt
             if(list_of_pets.get(i).getAge()<2){
-                if((Math.random()*(1000))/10<child_death_chance){
+                if((Math.random()*(1000))/10 < this.child_death_chance){
                     list_of_pets.remove(i);
                 }
             }
             if(list_of_pets.get(i).getAge()<12){
-                if((Math.random()*(1000))/10<adult_death_chance){
+                if((Math.random()*(1000))/10 < this.adult_death_chance){
                     list_of_pets.remove(i);
                 }
             }if(list_of_pets.get(i).getAge()<16){
-                if((Math.random()*(1000))/10<senior_death_chance){
+                if((Math.random()*(1000))/10 < this.senior_death_chance){
                     list_of_pets.remove(i);
                 }
             }
             else {
-                if ((Math.random() * (1000)) / 10 < old_death_chance) {
+                if ((Math.random() * (1000)) / 10 < this.old_death_chance) {
                     list_of_pets.remove(i);
                 }
             }
@@ -238,8 +251,8 @@ public class City {
 
     }
 
-    public void born(double birht_rate, double animal_birth_rate){
-        int number_of_births = (int)Math.round(birht_rate*this.population/100);
+    public void born(){
+        int number_of_births = (int)Math.round(this.birth_rate*this.population/100);
         int men = Math.round(number_of_births*((float)(Math.round(Math.random() * (60 - 40) + 40)) /100));
         int women = number_of_births-men;
 
@@ -251,7 +264,7 @@ public class City {
         }
         this.population = list_of_residents.size();
 
-        int number_of_animal_births = (int)Math.round(animal_birth_rate*this.pets_population/100);
+        int number_of_animal_births = (int)Math.round(this.animal_birth_rate*this.pets_population/100);
         int cats = Math.round(number_of_animal_births*((float)(Math.round(Math.random() * (20 - 40) + 40)) /100));
         number_of_animal_births = number_of_animal_births - cats;
         int dogs = Math.round(number_of_animal_births*((float)(Math.round(Math.random() * (60 - 40) + 40)) /100));

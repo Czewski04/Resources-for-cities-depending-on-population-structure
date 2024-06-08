@@ -19,7 +19,7 @@ public class Simulation {
 
     public static void main(String[] args) {
         Simulation s = new Simulation();
-        City c1 = new City("Wroclaw", 200);
+        City c1 = new City("Wroclaw", 200, 5, 10, 15,60, 10, 5);
         c1.generate_residents();
         c1.generating_crops();
         System.out.println("liczba ludności " + c1.getList_of_residents().size());
