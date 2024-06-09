@@ -52,6 +52,10 @@ public class Simulation {
         System.out.println("Zapotrzebowanie na wodę: " + city.getSum_of_water());
     }
 
+    /**
+     * Funkcja wyświetlająca statystyki danego miasta.
+     * @param city Miasto, dla którego wyświetlane są statystyki.
+     */
     public void show_city_statistics(City city){
         System.out.println("\nOto statystyki miasta " + city.getName());
         System.out.println("Populacja " + city.getPopulation());
@@ -63,6 +67,10 @@ public class Simulation {
         System.out.println("\n");
     }
 
+    /**
+     * Funkcja postępująca w czasie symulacji.
+     * @return true, jeśli użytkownik chce kontynuować symulację, false w przeciwnym przypadku.
+     */
     public boolean time_progress(){
         Scanner reading = new Scanner(System.in);
         int progress;
@@ -113,6 +121,11 @@ public class Simulation {
         return false;
     }
 
+    /**
+     * Funkcja wyszukująca miasto po nazwie.
+     * @param city_name Nazwa miasta do wyszukania.
+     * @return Znalezione miasto lub null, jeśli miasto nie zostało znalezione.
+     */
     private City find_city_by_name(String city_name){
         for(City city : list_of_cities){
             if(city.getName().equals(city_name)){
@@ -150,6 +163,11 @@ public class Simulation {
         return false;
     }
 
+    /**
+     * Funkcja sprawdzająca, czy dane miasto jest puste.
+     * @param city Miasto do sprawdzenia.
+     * @return true, jeśli miasto jest puste, false w przeciwnym przypadku.
+     */
     public boolean city_is_empty_check(City city){
         if (city.getPopulation() == 0){
             System.out.println("Miasto " + city.getName() + " zostało usunięte z powodu braku mieszkańców!");
@@ -159,6 +177,10 @@ public class Simulation {
         else return false;
     }
 
+    /**
+     * Funkcja sprawdzająca, czy lista miast jest pusta.
+     * @return true, jeśli lista miast jest pusta, false w przeciwnym przypadku.
+     */
     public boolean list_of_cities_is_empty_check(){
         if(list_of_cities.isEmpty()){
             System.out.println("Twoja lista miast jest pusta! Nie można dalej prowdzaić symulacji!");
@@ -199,6 +221,11 @@ public class Simulation {
         }
     }
 
+    /**
+     * Funkcja eksportująca statystyki miasta do pliku CSV.
+     * @param filename Nazwa pliku do zapisu.
+     * @param city Miasto, którego statystyki mają zostać zapisane.
+     */
     public void export_city_statistics_to_csv(String filename, City city) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             writer.write( " ," +
@@ -228,6 +255,10 @@ public class Simulation {
         }
     }
 
+    /**
+     * Funkcja pobierająca liczbę całkowitą od użytkownika.
+     * @return Wprowadzona liczba całkowita.
+     */
     public static int user_int_input(){
         int decision = 0;
         boolean tmp = true;
@@ -244,6 +275,10 @@ public class Simulation {
         return decision;
     }
 
+    /**
+     * Funkcja pobierająca liczbę rzeczywistą od użytkownika.
+     * @return Wprowadzona liczba rzeczywista.
+     */
     public static double user_double_input(){
         double decision = 0;
         boolean tmp = true;
@@ -260,6 +295,10 @@ public class Simulation {
         return decision;
     }
 
+    /**
+     * Funkcja tworząca nowe miasta poprzez pobieranie danych od użytkownika.
+     * @return Nowo utworzone miasto.
+     */
     public City getting_city_data() {
         Scanner reading_data = new Scanner(System.in);
         System.out.println("Podaj nazwę miasta: ");
@@ -284,6 +323,10 @@ public class Simulation {
         return new City(nazwa_miasta, population, child_death_chance, adult_death_chance, senior_death_chance, old_death_chance, birth_rate, animal_birth_rate, natural_disaster_chance);
     }
 
+    /**
+     * Funkcja zmieniająca dane miasta na podstawie danych wprowadzonych przez użytkownika.
+     * @param city Miasto, którego dane mają być zmienione.
+     */
     public void changing_city_data(City city){
         System.out.println("Podaj kolejno nowe procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
         double child_death_chance = user_double_input();
@@ -313,6 +356,10 @@ public class Simulation {
         System.out.println("Wszystkie dane miast są przesyłane do CVS do późnijszego wglądu.\n");
     }
 
+    /**
+     * Metoda main, rozpoczynająca działanie symulacji.
+     * @param args Argumenty wiersza poleceń (nie używane).
+     */
     public static void main(String[] args) {
         Simulation s = new Simulation();
         s.hello();
