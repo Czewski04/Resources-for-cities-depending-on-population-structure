@@ -81,17 +81,17 @@ public class City {
         Scanner reading_data = new Scanner(System.in);
 
         System.out.println("Podaj kolejno nowe procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
-        double child_death_chance = reading_data.nextDouble();
-        double adult_death_chance = reading_data.nextDouble();
-        double senior_death_chance = reading_data.nextDouble();
-        double old_death_chance = reading_data.nextDouble();
+        this.child_death_chance = reading_data.nextDouble();
+        this.adult_death_chance = reading_data.nextDouble();
+        this.senior_death_chance = reading_data.nextDouble();
+        this.old_death_chance = reading_data.nextDouble();
 
         System.out.println("Podaj kolejno nowe współczynnik urodzień ludzi na 100 mieszkańców oraz współczynnik urodzień zwierząt na 100 mieszkańców ");
-        double birth_rate = reading_data.nextDouble();
-        double animal_birth_rate = reading_data.nextDouble();
+        this.birth_rate = reading_data.nextDouble();
+        this.animal_birth_rate = reading_data.nextDouble();
 
         System.out.println("Podaj nowe prawdopodobieństwo wystąpienia klęski żywiołowej: ");
-        double natural_disaster_chance = reading_data.nextDouble();
+        this.natural_disaster_chance = reading_data.nextDouble();
     }
 
     public void generate_residents(){
@@ -312,28 +312,34 @@ public class City {
     public void natural_disaster(){
         double random_event = Math.random()*(1000)/10;
         if(random_event<=natural_disaster_chance){
+            System.out.println("przed: "+ this.population);
+            int population_before_disaster = this.population;
             random_event = Math.random()*(1000)/10;
             if(random_event<10){
-                population = (int)Math.round(population/2);
+                this.population = (int)Math.round(this.population*0.5);
                 System.out.println("Twoje miasto zostało zdziesiątkowane przez epidemię! Utraciłeś/aś 50% mieszkańców");
             }
             else if(random_event<33.33){
-                population = (int)Math.round(population*0.6666);
+                this.population = (int)Math.round(this.population*0.6666);
                 System.out.println("Twoje miasto na sktuek konfliktu zbrojnego utraciło 33% mieszkańców!");
             }
             else if(random_event<63.33){
-                population = (int)Math.round(population*0.8);
+                this.population = (int)Math.round(this.population*0.8);
                 System.out.println("Na skutek wybuchu wulkanu utraciłeś/łaś 20% mieszkańców!");
             }
             else if(random_event<99){
-                population = (int)Math.round(population*0.9);
+                this.population = (int)Math.round(this.population*0.9);
                 System.out.println("Twoje miasto straciło 10% mieszkańców w wyniku huraganu!");
             }
             else {
-                population = 0;
+                this.population = 0;
                 System.out.println("Niestety Twoje miasto spotkał niezwykle rzadki pech i zostało ono trafione przez asteroidę! Wszyscy zgineli!");
             }
+            for(int i = 0; i<population_before_disaster-this.population; i++){
+                list_of_residents.remove((int)Math.random()*(list_of_residents.size()-1));
+            }
         }
+        System.out.println("po: "+ this.population);
     }
 
     public ArrayList<Crops> getList_of_crops() {

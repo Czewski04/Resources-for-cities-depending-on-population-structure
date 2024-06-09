@@ -58,23 +58,11 @@ public class Simulation {
         while (true){
             if(list_of_cities_is_empty_check()) break;
 
-            System.out.println("Jaki okres czasu chcesz dodać?(>1): \n0 - Powrót do menu miast\n1 - Zmiana parametrów");
+            System.out.println("Jaki okres czasu chcesz dodać?: \n0 - Powrót do menu miast");
             progress = reading.nextInt();
 
             if(progress == 0) break;
-            else if(progress == 1){
-                System.out.println("Przechodzisz do menu edycji współczynników");
-                System.out.println("Podaj nazwę miasta, którego dane chcesz zmienić:");
-                String cityName = reading.next();
 
-                City city = find_city_by_name(cityName);
-                if (city != null) {
-                    city.changing_city_data();
-                } else {
-                    System.out.println("Miasto o podanej nazwie nie istnieje.");
-                }
-                continue;
-            }
             this.time += progress;
             for(int j = 0; j < progress; j++){
                 for(int i = 0; i < list_of_cities.size(); i++){
@@ -86,11 +74,23 @@ public class Simulation {
                 }
             }
         }
-        while (true){   //tutaj potrzebujemy kolejne opcji do przeniesiania nas do menu w którym będizemy mogli edytować współczynniki w trakcie pracy programy
-            System.out.println("Chcesz przejść do tworzenia kolejnych miast, czy zakończyć program? \n1 - Twórz miasta \n0 - Zakończ program");
+        while (true){
+            System.out.println("Chcesz przejść do tworzenia kolejnych miast, edytować parametry, kontynuować symulację czy zakończyć program? \n1 - Twórz miasta lub kontynuuj symulację \n2 - Edutuj parametry istniejących miast \n0 - Zakończ program");
             decision = reading.nextInt();
             if(decision == 1) return true;
-            if(decision == 0) break;
+            else if(decision == 2){
+                System.out.println("Przechodzisz do menu edycji współczynników");
+                System.out.println("Podaj nazwę miasta, którego dane chcesz zmienić:");
+                String cityName = reading.next();
+
+                City city = find_city_by_name(cityName);
+                if (city != null) {
+                    city.changing_city_data();
+                } else {
+                    System.out.println("Miasto o podanej nazwie nie istnieje.");
+                }
+            }
+            else if(decision == 0) break;
             else System.out.println("Podaj właściwą liczbę");
         }
         return false;
@@ -218,5 +218,4 @@ public class Simulation {
 
 }
 
-// do zrobienia menu miasta
 //testy jednostkowe
