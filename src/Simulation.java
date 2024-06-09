@@ -135,6 +135,11 @@ public class Simulation {
         return null;
     }
 
+
+    /**
+     * Funkcja dodająca nowe miasta do listy miast
+     * @return ture jeśli użytkownik zakończy program w przeciwnym wypadku false
+     */
     public boolean creating_cities(){
         while(true){
             System.out.println("Aktualna liczba miast: " + list_of_cities.size());
@@ -188,6 +193,12 @@ public class Simulation {
         }
         else return false;
     }
+
+    /**
+     * Funkcja tworząca nagłówki do csv, import pierwszych danych
+     * @param filename nazwa nowego pliku
+     * @param city miasto którego dane są eksportowane
+     */
     public void first_export_city_statistics_to_csv(String filename, City city) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
 
@@ -343,6 +354,10 @@ public class Simulation {
 
         city.setting_city_data(child_death_chance, adult_death_chance, senior_death_chance, old_death_chance, birth_rate, animal_birth_rate, natural_disaster_chance);
     }
+
+    /**
+     * Funkcja generująca ekran startowy
+     */
     public void hello(){
         System.out.println("Witamy w naszej symulacji!\n");
         System.out.println("Projekt autorstwa: \n" +
@@ -371,4 +386,3 @@ public class Simulation {
 
 }
 
-//testy jednostkowe

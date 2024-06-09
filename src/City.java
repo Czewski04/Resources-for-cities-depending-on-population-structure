@@ -112,6 +112,9 @@ public class City {
         }
     }
 
+    /**
+     * Funckaj obliczająca zasoby miasta bez wody
+     */
     public void calcualte_sum_without_water(){ //obliczanie zapotrzebowania na surowece (bez wody)
         //zliczanie zapotrzebowania populacji
         for(int i = 0; i < population; i++){
@@ -135,6 +138,9 @@ public class City {
         }
     }
 
+    /**
+     * Funckaj obliczająca potrzebną wodę
+     */
     public void calculate_sum_of_water(){ //obliczanie zapotrzebowania na wode wraz z polami uprawnymi
         //zliczanie zapotrzebowania pól
         for (Crops listOfCrop : list_of_crops) {
@@ -150,6 +156,9 @@ public class City {
         }
     }
 
+    /**
+     * Dodawanie pól uprawnych do miasta
+     */
     public void generating_crops(){
         // dodawanie pól każdego rodzaju do miasta
         list_of_crops.add(new Potato_crops());
@@ -160,6 +169,10 @@ public class City {
         list_of_crops.add(new Wheat_crops());
     }
 
+
+    /**
+     * Przekazywanie zapotrzebowania do pól uprawnych
+     */
     public void cultivating_fields(){
         //przekazywanie zapotrzebowania do pól uprawnych
         list_of_crops.get(0).calculate_crop_parameters(sum_of_potatoes);
@@ -170,6 +183,10 @@ public class City {
         list_of_crops.get(5).calculate_crop_parameters(sum_of_wheat);
     }
 
+
+    /**
+     * Uśmiercanie mieszkańców
+     */
     public void death(){   //losowanie śmierci
         for(int i = 0; i < list_of_residents.size(); i++){  //losowanie śmierci dla ludzi
             if(list_of_residents.get(i).getAge()<20){
