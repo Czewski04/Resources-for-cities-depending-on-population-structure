@@ -1,6 +1,7 @@
 import Crops.Crops;
 import Crops.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -28,7 +29,6 @@ public class Simulation {
             }
         }
     }
-
 
     public void show_food_demand(City city){
         System.out.println("Zapotrzebowanie na jabłka: " + city.getSum_of_apples());
@@ -61,7 +61,8 @@ public class Simulation {
             if(list_of_cities_is_empty_check()) break;
 
             System.out.println("Jaki okres czasu chcesz dodać?: \n0 - Powrót do menu miast");
-            progress = reading.nextInt();
+
+            progress = user_int_input();
 
             if(progress == 0) break;
 
@@ -78,16 +79,20 @@ public class Simulation {
         }
         while (true){
             System.out.println("Chcesz przejść do tworzenia kolejnych miast, edytować parametry, kontynuować symulację czy zakończyć program? \n1 - Twórz miasta lub kontynuuj symulację \n2 - Edutuj parametry istniejących miast \n0 - Zakończ program");
-            decision = reading.nextInt();
+            decision = user_int_input();
             if(decision == 1) return true;
             else if(decision == 2){
                 System.out.println("Przechodzisz do menu edycji współczynników");
                 System.out.println("Podaj nazwę miasta, którego dane chcesz zmienić:");
+                System.out.println("Lista aktualnei stworzoncyh miast: ");
+                for(int i = 0; i < list_of_cities.size(); i++){
+                    System.out.println(i+1 + ". " + list_of_cities.get(i).getName());
+                }
                 String cityName = reading.next();
 
                 City city = find_city_by_name(cityName);
                 if (city != null) {
-                    city.changing_city_data();
+                    changing_city_data(city);
                 } else {
                     System.out.println("Miasto o podanej nazwie nie istnieje.");
                 }
@@ -97,6 +102,7 @@ public class Simulation {
         }
         return false;
     }
+
     private City find_city_by_name(String city_name){
         for(City city : list_of_cities){
             if(city.getName().equals(city_name)){
@@ -107,14 +113,14 @@ public class Simulation {
     }
 
     public boolean creating_cities(){
-        Scanner reading = new Scanner(System.in);
         while(true){
             System.out.println("Aktualna liczba miast: " + list_of_cities.size());
             System.out.println("Chcesz stworzyć miasto? \n 1 - tak \n 2 - nie, przejdź do symulacji \n 0 - zakończ program");
-            int decision = reading.nextInt();
+            int decision = user_int_input();
+
             if(decision == 0) return true;
             else if(decision == 1){
-                list_of_cities.add(City.getting_city_data());
+                list_of_cities.add(getting_city_data());
                 list_of_cities.getLast().Start();
                 first_export_city_statistics_to_csv(list_of_cities.getLast().getName()+".csv", list_of_cities.getLast());
             }
@@ -213,6 +219,78 @@ public class Simulation {
         }
     }
 
+    public static int user_int_input(){
+        int decision = 0;
+        boolean tmp = true;
+        while(tmp){
+            Scanner scanner = new Scanner(System.in);
+            try{
+                decision = scanner.nextInt();
+                tmp = false;
+            }
+            catch(InputMismatchException e){
+                System.out.println("Podaj liczbę!");
+            }
+        }
+        return decision;
+    }
+
+    public static double user_double_input(){
+        double decision = 0;
+        boolean tmp = true;
+        while(tmp){
+            Scanner scanner = new Scanner(System.in);
+            try{
+                decision = scanner.nextInt();
+                tmp = false;
+            }
+            catch(InputMismatchException e){
+                System.out.println("Podaj liczbę!");
+            }
+        }
+        return decision;
+    }
+
+    public City getting_city_data() {
+        Scanner reading_data = new Scanner(System.in);
+        System.out.println("Podaj nazwę miasta: ");
+        String nazwa_miasta = reading_data.nextLine();
+
+        System.out.println("Podaj początkową populację miasta: ");
+        int population =user_int_input();
+
+        System.out.println("Podaj kolejno procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
+        double child_death_chance = user_double_input();
+        double adult_death_chance = user_double_input();
+        double senior_death_chance = user_double_input();
+        double old_death_chance = user_double_input();
+
+        System.out.println("Podaj kolejno współczynnik urodzień ludzi na 100 mieszkańców oraz współczynnik urodzień zwierząt na 100 mieszkańców ");
+        double birth_rate = user_double_input();
+        double animal_birth_rate = user_double_input();
+
+        System.out.println("Podaj prawdopodobieństwo wystąpienia klęski żywiołowej: ");
+        double natural_disaster_chance = user_double_input();
+
+        return new City(nazwa_miasta, population, child_death_chance, adult_death_chance, senior_death_chance, old_death_chance, birth_rate, animal_birth_rate, natural_disaster_chance);
+    }
+
+    public void changing_city_data(City city){
+        System.out.println("Podaj kolejno nowe procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
+        double child_death_chance = user_double_input();
+        double adult_death_chance = user_double_input();
+        double senior_death_chance = user_double_input();
+        double old_death_chance = user_double_input();
+
+        System.out.println("Podaj kolejno nowe współczynnik urodzień ludzi na 100 mieszkańców oraz współczynnik urodzień zwierząt na 100 mieszkańców ");
+        double birth_rate = user_double_input();
+        double animal_birth_rate = user_double_input();
+
+        System.out.println("Podaj nowe prawdopodobieństwo wystąpienia klęski żywiołowej: ");
+        double natural_disaster_chance = user_double_input();
+
+        city.setting_city_data(child_death_chance, adult_death_chance, senior_death_chance, old_death_chance, birth_rate, animal_birth_rate, natural_disaster_chance);
+    }
 
     public static void main(String[] args) {
         Simulation s = new Simulation();

@@ -53,45 +53,14 @@ public class City {
         this.natural_disaster_chance = natural_disaster_chance;
     }
 
-    public static City getting_city_data() {
-        Scanner reading_data = new Scanner(System.in);
-        System.out.println("Podaj nazwę miasta: ");
-        String nazwa_miasta = reading_data.nextLine();
-
-        System.out.println("Podaj początkową populację miasta: ");
-        int population = reading_data.nextInt();
-
-        System.out.println("Podaj kolejno procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
-        double child_death_chance = reading_data.nextDouble();
-        double adult_death_chance = reading_data.nextDouble();
-        double senior_death_chance = reading_data.nextDouble();
-        double old_death_chance = reading_data.nextDouble();
-
-        System.out.println("Podaj kolejno współczynnik urodzień ludzi na 100 mieszkańców oraz współczynnik urodzień zwierząt na 100 mieszkańców ");
-        double birth_rate = reading_data.nextDouble();
-        double animal_birth_rate = reading_data.nextDouble();
-
-        System.out.println("Podaj prawdopodobieństwo wystąpienia klęski żywiołowej: ");
-        double natural_disaster_chance = reading_data.nextDouble();
-
-        City city = new City(nazwa_miasta, population, child_death_chance, adult_death_chance, senior_death_chance, old_death_chance, birth_rate, animal_birth_rate, natural_disaster_chance);
-        return city;
-    }
-    public void changing_city_data(){
-        Scanner reading_data = new Scanner(System.in);
-
-        System.out.println("Podaj kolejno nowe procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
-        this.child_death_chance = reading_data.nextDouble();
-        this.adult_death_chance = reading_data.nextDouble();
-        this.senior_death_chance = reading_data.nextDouble();
-        this.old_death_chance = reading_data.nextDouble();
-
-        System.out.println("Podaj kolejno nowe współczynnik urodzień ludzi na 100 mieszkańców oraz współczynnik urodzień zwierząt na 100 mieszkańców ");
-        this.birth_rate = reading_data.nextDouble();
-        this.animal_birth_rate = reading_data.nextDouble();
-
-        System.out.println("Podaj nowe prawdopodobieństwo wystąpienia klęski żywiołowej: ");
-        this.natural_disaster_chance = reading_data.nextDouble();
+    public void setting_city_data(double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance, double birth_rate, double animal_birth_rate, double natural_disaster_chance){
+        this.child_death_chance = child_death_chance;
+        this.adult_death_chance = adult_death_chance;
+        this.senior_death_chance = senior_death_chance;
+        this.old_death_chance = old_death_chance;
+        this.birth_rate = birth_rate;
+        this.animal_birth_rate = animal_birth_rate;
+        this.natural_disaster_chance = natural_disaster_chance;
     }
 
     public void generate_residents(){
@@ -312,7 +281,6 @@ public class City {
     public void natural_disaster(){
         double random_event = Math.random()*(1000)/10;
         if(random_event<=natural_disaster_chance){
-            System.out.println("przed: "+ this.population);
             int population_before_disaster = this.population;
             random_event = Math.random()*(1000)/10;
             if(random_event<10){
@@ -339,7 +307,6 @@ public class City {
                 list_of_residents.remove((int)Math.random()*(list_of_residents.size()-1));
             }
         }
-        System.out.println("po: "+ this.population);
     }
     public int number_of_women(){
         int women = 0;
