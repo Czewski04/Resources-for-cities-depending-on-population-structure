@@ -2,18 +2,34 @@ package People;
 
 import Interfaces.Set_food_demand_for_people;
 
+/**
+ * Klasa reprezentująca kobietę.
+ * Dziedziczy po klasie Person i implementuje interfejs Set_food_demand_for_people.
+ * Ta klasa określa zapotrzebowanie żywieniowe kobiety w różnych przedziałach wiekowych.
+ */
 public class Woman extends Person implements Set_food_demand_for_people {
 
+    /**
+     * Konstruktor domyślny klasy Woman, który losowo ustawia wiek i oblicza zapotrzebowanie żywieniowe.
+     */
     public Woman(){
         this.age = (int)Math.round((Math.random()*(100-1))+1);
         set_food_demand();
     }
 
+    /**
+     * Konstruktor klasy Woman, który ustawia wiek na podaną wartość i oblicza zapotrzebowanie żywieniowe.
+     *
+     * @param age wiek kobiety
+     */
     public Woman(int age){
         this.age = age;
         set_food_demand();
     }
 
+    /**
+     * Metoda obliczająca zapotrzebowanie żywieniowe kobiety w zależności od jej wieku.
+     */
     public void set_food_demand(){
         if(age<10){
             this.potatoes = Math.random();

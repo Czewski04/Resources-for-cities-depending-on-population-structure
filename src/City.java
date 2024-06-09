@@ -15,6 +15,9 @@ import Crops.Wheat_crops;
 
 import java.util.ArrayList;
 
+/**
+ * Klasa reprezentująca miasto w symulacji.
+ */
 public class City {
     private String name;
     private int population;
@@ -39,6 +42,9 @@ public class City {
     private double animal_birth_rate;
     private double natural_disaster_chance;
 
+    /**
+     * Konstruktor klasy City.
+     */
     public City(String name, int population, double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance, double birth_rate, double animal_birth_rate, double natural_disaster_chance) {
         this.name = name;
         this.population = population;
@@ -52,6 +58,10 @@ public class City {
         this.natural_disaster_chance = natural_disaster_chance;
     }
 
+
+    /**
+     * Ustawia dane miasta.
+     */
     public void setting_city_data(double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance, double birth_rate, double animal_birth_rate, double natural_disaster_chance){
         this.child_death_chance = child_death_chance;
         this.adult_death_chance = adult_death_chance;
@@ -62,6 +72,10 @@ public class City {
         this.natural_disaster_chance = natural_disaster_chance;
     }
 
+
+    /**
+     * Funkcja generująca mieszkańców miasta.
+     */
     public void generate_residents(){
         double people_max = 3.5;
         double people_min = 1.4;
@@ -215,11 +229,16 @@ public class City {
 
     }
 
+    /**
+     * Losuje nowe narodziny mieszkańców miasta.
+     */
     public void born(){
+        // Liczenie liczby narodzin
         int number_of_births = (int)Math.round(this.birth_rate*this.population/100);
         int men = Math.round(number_of_births*((float)(Math.round(Math.random() * (60 - 40) + 40)) /100));
         int women = number_of_births-men;
 
+        // Dodawanie nowych mieszkańców (mężczyzn i kobiet)
         for(int i = 0; i < men; i++){
             list_of_residents.add(new Man(0));
         }
@@ -228,12 +247,14 @@ public class City {
         }
         this.population = list_of_residents.size();
 
+        // Liczenie liczby narodzin zwierząt
         int number_of_animal_births = (int)Math.round(this.animal_birth_rate*this.population/100);
         int cats = Math.round(number_of_animal_births*((float)(Math.round(Math.random() * (20 - 40) + 40)) /100));
         number_of_animal_births = number_of_animal_births - cats;
         int dogs = Math.round(number_of_animal_births*((float)(Math.round(Math.random() * (60 - 40) + 40)) /100));
         int rodnets = number_of_animal_births-dogs;
 
+        // Dodawanie nowych zwierząt (kotów, psów, gryzoni)
         for(int i = 0; i < cats; i++){
             list_of_pets.add(new Cat(0));
         }
@@ -254,25 +275,38 @@ public class City {
         calculate_sum_of_water();
     }
 
+    /**
+     * Symuluje działanie miasta w kolejnym okresie czasu.
+     */
     public void Time(){
+        // Starzenie się mieszkańców
         for(Person resident : list_of_residents){
             resident.add_age();
             resident.set_food_demand();
         }
 
+        // Starzenie się zwierząt
         for(Pet pet : list_of_pets){
             pet.add_age();
             pet.set_food_demand_for_pets();
         }
 
+        // Narodziny i śmierć
         born();
         death();
+
+        // Symulacja klęsk naturalnych
         natural_disaster();
+        // Ponowne obliczenie zapotrzebowania i upraw
         calcualte_sum_without_water();
         cultivating_fields();
+        // Obliczenie zapotrzebowania na wodę
         calculate_sum_of_water();
     }
 
+    /**
+     * Czyści sumy zapotrzebowania na surowce i wodę.
+     */
     public void Clear(){
         sum_of_apples = 0;
         sum_of_bread = 0;
@@ -285,12 +319,18 @@ public class City {
         sum_of_wheat = 0;
     }
 
+    /**
+     * Symuluje wystąpienie klęski naturalnej, losowo decydując o jej rodzaju i skutkach.
+     */
     public void natural_disaster(){
+        // Losowanie wydarzenia losowego
         double random_event = Math.random()*(1000)/10;
         if(random_event<=natural_disaster_chance){
             int population_before_disaster = this.population;
             int pets_population_before_disaster = this.pets_population;
             random_event = Math.random()*(1000)/10;
+
+            // Określenie skutków klęski w zależności od wylosowanego zdarzenia
             if(random_event<10){
                 this.population = (int)Math.round(this.population*0.5);
                 this.pets_population = (int)Math.round(this.pets_population*0.5);
@@ -316,15 +356,23 @@ public class City {
                 this.pets_population = 0;
                 System.out.println("Niestety Twoje miasto spotkał niezwykle rzadki pech i zostało ono trafione przez asteroidę! Wszyscy zgineli!");
             }
+
+            // Usuwanie losowo wybranych mieszkańców z listy w zależności od liczby zmarłych
             for(int i = 0; i<population_before_disaster-this.population; i++){
                 list_of_residents.remove((int)(Math.random()*(list_of_residents.size()-1)));
             }
+
+            // Usuwanie losowo wybranych zwierząt z listy w zależności od liczby zmarłych
             for(int i = 0; i<pets_population_before_disaster-this.pets_population; i++){
                 list_of_pets.remove((int)(Math.random()*(list_of_pets.size()-1)));
             }
         }
     }
 
+    /**
+     * Zwraca liczbę kobiet w populacji miasta.
+     * @return Liczba kobiet.
+     */
     public int number_of_women(){
         int women = 0;
         for(Person resident : list_of_residents){
@@ -335,68 +383,132 @@ public class City {
         return women;
     }
 
+    /**
+     * Zwraca liczbę mężczyzn w populacji miasta.
+     * @return Liczba mężczyzn.
+     */
     public int number_of_men(){
         int men;
         men = this.population - number_of_women();
         return men;
     }
 
+    /**
+     * Zwraca listę upraw w mieście.
+     * @return Lista upraw.
+     */
     public ArrayList<Crops> getList_of_crops() {
         return list_of_crops;
     }
 
+    /**
+     * Zwraca listę zwierząt w mieście.
+     * @return Lista zwierząt.
+     */
     public ArrayList<Pet> getList_of_pets() {
         return list_of_pets;
     }
 
+    /**
+     * Zwraca listę mieszkańców miasta.
+     * @return Lista mieszkańców.
+     */
     public ArrayList<Person> getList_of_residents() {
         return list_of_residents;
     }
 
+    /**
+     * Zwraca nazwę miasta.
+     * @return Nazwa miasta.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Zwraca liczbę ludności w mieście.
+     * @return Liczba ludności.
+     */
     public int getPopulation() {
         return population;
     }
 
+    /**
+     * Zwraca liczbę zwierząt w mieście.
+     * @return Liczba zwierząt.
+     */
     public int getPets_population() {
         return pets_population;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na jabłka.
+     * @return Suma zapotrzebowania na jabłka.
+     */
     public double getSum_of_apples() {
         return sum_of_apples;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na chleb.
+     * @return Suma zapotrzebowania na chleb.
+     */
     public double getSum_of_bread() {
         return sum_of_bread;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na ogórki.
+     * @return Suma zapotrzebowania na ogórki.
+     */
     public double getSum_of_cucumbers() {
         return sum_of_cucumbers;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na mięso.
+     * @return Suma zapotrzebowania na mięso.
+     */
     public double getSum_of_meat() {
         return sum_of_meat;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na ziemniaki.
+     * @return Suma zapotrzebowania na ziemniaki.
+     */
     public double getSum_of_potatoes() {
         return sum_of_potatoes;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na nasiona.
+     * @return Suma zapotrzebowania na nasiona.
+     */
     public double getSum_of_seeds() {
         return sum_of_seeds;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na pomidory.
+     * @return Suma zapotrzebowania na pomidory.
+     */
     public double getSum_of_tomatoes() {
         return sum_of_tomatoes;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na wodę.
+     * @return Suma zapotrzebowania na wodę.
+     */
     public double getSum_of_water() {
         return sum_of_water;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na pszenicę.
+     * @return Suma zapotrzebowania na pszenicę.
+     */
     public double getSum_of_wheat(){
         return sum_of_wheat;
     }
