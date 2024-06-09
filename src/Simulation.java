@@ -7,11 +7,17 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-
+/**
+ * Klasa zarządzająca całą symulacją, zawiera interfej użytkownia
+ */
 public class Simulation {
     public int time;
     public ArrayList<City> list_of_cities = new ArrayList<>();
 
+    /**
+     * Fukncja wyświetlająca użytkownikowi powierzchnię potrzebną dla każego pola uprawneggo
+     * @param city
+     */
     public void show_crop_area(City city) {
         for (Crops crop : city.getList_of_crops()) {
             if (crop instanceof Potato_crops) {
@@ -30,6 +36,10 @@ public class Simulation {
         }
     }
 
+    /**
+     * Funkcja wyświetlająca zapotrzebowanie na zasoby danego miasta
+     * @param city
+     */
     public void show_food_demand(City city){
         System.out.println("Zapotrzebowanie na jabłka: " + city.getSum_of_apples());
         System.out.println("Zapotrzebowanie na chleb: " + city.getSum_of_bread());
