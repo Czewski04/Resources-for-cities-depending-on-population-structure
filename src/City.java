@@ -123,8 +123,8 @@ public class City {
 
     public void calculate_sum_of_water(){ //obliczanie zapotrzebowania na wode wraz z polami uprawnymi
         //zliczanie zapotrzebowania pól
-        for(int i = 0; i < list_of_crops.size(); i++){
-            this.sum_of_water += list_of_crops.get(i).getWater_demand();
+        for (Crops listOfCrop : list_of_crops) {
+            this.sum_of_water += listOfCrop.getWater_demand();
         }
         //woda dla zwierzat
         for(int i = 0; i < pets_population; i++){
@@ -317,10 +317,10 @@ public class City {
                 System.out.println("Niestety Twoje miasto spotkał niezwykle rzadki pech i zostało ono trafione przez asteroidę! Wszyscy zgineli!");
             }
             for(int i = 0; i<population_before_disaster-this.population; i++){
-                list_of_residents.remove((int)Math.random()*(list_of_residents.size()-1));
+                list_of_residents.remove((int)(Math.random()*(list_of_residents.size()-1)));
             }
             for(int i = 0; i<pets_population_before_disaster-this.pets_population; i++){
-                list_of_residents.remove((int)Math.random()*(list_of_pets.size()-1));
+                list_of_pets.remove((int)(Math.random()*(list_of_pets.size()-1)));
             }
         }
     }
@@ -334,7 +334,7 @@ public class City {
         return women;
     }
     public int number_of_men(){
-        int men = 0;
+        int men;
         men = this.population - number_of_women();
         return men;
     }

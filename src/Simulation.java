@@ -191,7 +191,6 @@ public class Simulation {
 
     public void export_city_statistics_to_csv(String filename, City city) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
-
             writer.write( " ," +
                     city.getPopulation() + "," +
                     city.number_of_women() + "," +
