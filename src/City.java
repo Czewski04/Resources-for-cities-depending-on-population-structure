@@ -14,7 +14,6 @@ import Crops.Tomato_crops;
 import Crops.Wheat_crops;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class City {
@@ -39,8 +38,9 @@ public class City {
     private double old_death_chance;
     private double birth_rate;
     private double animal_birth_rate;
+    private double natural_disaster_chance;
 
-    public City(String name, int population, double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance, double birth_rate, double animal_birth_rate) {
+    public City(String name, int population, double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance, double birth_rate, double animal_birth_rate, double natural_disaster_chance) {
         this.name = name;
         this.population = population;
         this.pets_population = (int) Math.round(population/((Math.random()*(10-2))+2));
@@ -50,6 +50,7 @@ public class City {
         this.old_death_chance = old_death_chance;
         this.birth_rate = birth_rate;
         this.animal_birth_rate = animal_birth_rate;
+        this.natural_disaster_chance = natural_disaster_chance;
     }
 
     public static City getting_city_data() {
@@ -70,7 +71,10 @@ public class City {
         double birth_rate = reading_data.nextDouble();
         double animal_birth_rate = reading_data.nextDouble();
 
-        City city = new City(nazwa_miasta, population, child_death_chance, adult_death_chance, senoir_death_chance, old_death_chance, birth_rate, animal_birth_rate);
+        System.out.println("Podaj prawdopodobieństwo wystąpienia klęski żywiołowej: ");
+        double natural_disaster_chance = reading_data.nextDouble();
+
+        City city = new City(nazwa_miasta, population, child_death_chance, adult_death_chance, senoir_death_chance, old_death_chance, birth_rate, animal_birth_rate, natural_disaster_chance);
         return city;
     }
 
@@ -92,6 +96,10 @@ public class City {
 
     public int getPopulation() {
         return population;
+    }
+
+    public int getPets_population() {
+        return pets_population;
     }
 
     public double getSum_of_apples() {
@@ -289,7 +297,7 @@ public class City {
         }
         this.population = list_of_residents.size();
 
-        int number_of_animal_births = (int)Math.round(this.animal_birth_rate*this.pets_population/100);
+        int number_of_animal_births = (int)Math.round(this.animal_birth_rate*this.population/100);
         int cats = Math.round(number_of_animal_births*((float)(Math.round(Math.random() * (20 - 40) + 40)) /100));
         number_of_animal_births = number_of_animal_births - cats;
         int dogs = Math.round(number_of_animal_births*((float)(Math.round(Math.random() * (60 - 40) + 40)) /100));
@@ -315,24 +323,23 @@ public class City {
         calculate_sum_of_water();
     }
 
-    public void Time(int progress){
-        for(int i=0; i<progress; i++){
-            for(Person resident : list_of_residents){
-                resident.add_age();
-                resident.set_food_demand();
-            }
-
-            for(Pet pet : list_of_pets){
-                pet.add_age();
-                pet.set_food_demand_for_pets();
-            }
-
-            born();
-            death();
-            calcualte_sum_without_water();
-            cultivating_fields();
-            calculate_sum_of_water();
+    public void Time(){
+        for(Person resident : list_of_residents){
+            resident.add_age();
+            resident.set_food_demand();
         }
+
+        for(Pet pet : list_of_pets){
+            pet.add_age();
+            pet.set_food_demand_for_pets();
+        }
+
+        born();
+        death();
+        natural_disaster();
+        calcualte_sum_without_water();
+        cultivating_fields();
+        calculate_sum_of_water();
     }
 
     public void Clear(){
@@ -347,4 +354,30 @@ public class City {
         sum_of_wheat = 0;
     }
 
+    public void natural_disaster(){
+        double random_event = Math.random()*(1000)/10;
+        if(random_event<=natural_disaster_chance){
+            random_event = Math.random()*(1000)/10;
+            if(random_event<10){
+                population = (int)Math.round(population/2);
+                System.out.println("Twoje miasto zostało zdziesiątkowane przez epidemię! Utraciłeś/aś 50% mieszkańców");
+            }
+            else if(random_event<33.33){
+                population = (int)Math.round(population*0.6666);
+                System.out.println("Twoje miasto na sktuek konfliktu zbrojnego utraciło 33% mieszkańców!");
+            }
+            else if(random_event<63.33){
+                population = (int)Math.round(population*0.8);
+                System.out.println("Na skutek wybuchu wulkanu utraciłeś/łaś 20% mieszkańców!");
+            }
+            else if(random_event<99){
+                population = (int)Math.round(population*0.9);
+                System.out.println("Twoje miasto straciło 10% mieszkańców w wyniku huraganu!");
+            }
+            else {
+                population = 0;
+                System.out.println("Niestety Twoje miasto spotkał niezwykle rzadki pech i zostało ono trafione przez asteroidę! Wszyscy zgineli!");
+            }
+        }
+    }
 }

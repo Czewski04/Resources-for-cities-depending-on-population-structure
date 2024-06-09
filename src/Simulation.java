@@ -38,37 +38,53 @@ public class Simulation {
         System.out.println("Zapotrzebowanie na wodę: " + city.getSum_of_water());
     }
 
-    public void time_progress(){
+    public void show_city_statistics(City city){
+        System.out.println("\nOto statystyki miasta " + city.getName());
+        System.out.println("Populacja " + city.getPopulation());
+        System.out.println("Populacja zwierząt " + city.getPets_population());
+        show_crop_area(city);
+        show_food_demand(city);
+        System.out.println("\n");
+    }
+
+    public boolean time_progress(){
         Scanner reading = new Scanner(System.in);
         int progress = 0;
+        int decision = 0;
         while (true){
-            for(int i = 0; i < this.list_of_cities.size(); i++){
-                System.out.println("Oto statystyki miasta " + list_of_cities.get(i).getName());
-                System.out.println("Populacja " + list_of_cities.get(i).getPopulation());
-                show_crop_area(list_of_cities.get(i));
-                show_food_demand(list_of_cities.get(i));
-            }
-
+            if(list_of_cities_is_empty_check()) break;
 
             System.out.println("Jaki okres czasu chcesz dodać: ");
             progress = reading.nextInt();
 
             this.time += progress;
-            for(int i = 0; i < this.list_of_cities.size(); i++){
-                list_of_cities.get(i).Clear();
-                list_of_cities.get(i).Time(progress);
+            for(int j = 0; j<progress; j++){
+                for(int i = 0; i < list_of_cities.size(); i++){
+                    list_of_cities.get(i).Clear();
+                    list_of_cities.get(i).Time();
+                    show_city_statistics(list_of_cities.get(i));
+                    if (city_is_empty_check(list_of_cities.get(i))) i--;
+                }
             }
-
         }
-
+        while (true){
+            System.out.println("Chcesz przejść do tworzenia kolejnych miast, czy zakończyć program? \n1 - Twórz miasta \n2-Zakończ program");
+            decision = reading.nextInt();
+            if(decision == 1) return true;
+            if(decision == 2) break;
+            else System.out.println("Podaj właśiwą liczbę");
+        }
+        return false;
     }
 
-    public void creating_cities(){
+    public boolean creating_cities(){
         Scanner reading = new Scanner(System.in);
         while(true){
-            System.out.println("Chcesz stworzyć miasto? \n 1 - tak \n 2 - nie, przejdź do symulacji");
+            System.out.println("Aktualna liczba miast: " + list_of_cities.size());
+            System.out.println("Chcesz stworzyć miasto? \n 1 - tak \n 2 - nie, przejdź do symulacji \n 0 - zakończ program");
             int decision = reading.nextInt();
-            if(decision == 1){
+            if(decision == 0) return true;
+            else if(decision == 1){
                 list_of_cities.add(City.getting_city_data());
                 list_of_cities.getLast().Start();
             }
@@ -78,14 +94,42 @@ public class Simulation {
             else if(decision<1 || decision>2){
                 System.out.println("Podaj właściwą opcję w menu!");
             }
-            else break;
+            else {
+                for (City listOfCity : list_of_cities) {
+                    show_city_statistics(listOfCity);
+                }
+                break;
+            }
         }
+        return false;
+    }
+
+    public boolean city_is_empty_check(City city){
+        if (city.getPopulation() == 0){
+            System.out.println("Miasto " + city.getName() + " zostało usunięte z powodu braku mieszkańców!");
+            list_of_cities.remove(list_of_cities.indexOf(city));
+            return true;
+        }
+        else return false;
+    }
+
+    public boolean list_of_cities_is_empty_check(){
+        if(list_of_cities.isEmpty()){
+            System.out.println("Twoja lista miast jest pusta! Nie można dalej prowdzaić symulacji!");
+            return true;
+        }
+        else return false;
     }
 
     public static void main(String[] args) {
         Simulation s = new Simulation();
 
-        s.creating_cities();
-        s.time_progress();
+        do{
+            if(s.creating_cities()) break;
+        }while(s.time_progress());
     }
 }
+
+// do zrobienia menu miasta
+// do zrobienia export do csv
+
