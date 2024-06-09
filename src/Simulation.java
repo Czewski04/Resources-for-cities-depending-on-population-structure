@@ -67,6 +67,7 @@ public class Simulation {
                     list_of_cities.get(i).Clear();
                     list_of_cities.get(i).Time();
                     show_city_statistics(list_of_cities.get(i));
+                    export_city_statistics_to_csv(list_of_cities.get(i).getName()+".csv", list_of_cities.get(i));
                     if (city_is_empty_check(list_of_cities.get(i))) i--;
                 }
             }
@@ -91,6 +92,7 @@ public class Simulation {
             else if(decision == 1){
                 list_of_cities.add(City.getting_city_data());
                 list_of_cities.getLast().Start();
+                first_export_city_statistics_to_csv(list_of_cities.getLast().getName()+".csv", list_of_cities.getLast());
             }
             else if (decision == 2 && list_of_cities.isEmpty()) {
                 System.out.println("Twoja symualcja nie może się odbyć, gdyż nie utworzyłeś ani jednego miasta!");
@@ -124,32 +126,67 @@ public class Simulation {
         }
         else return false;
     }
-    public void export_city_statistics_to_csv(String filename) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+    public void first_export_city_statistics_to_csv(String filename, City city) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             // Write CSV header
-            writer.write("City Name,Population,Pets Population,Apple Demand,Bread Demand,Cucumber Demand,Meat Demand,Potato Demand,Seed Demand,Tomato Demand,Wheat Demand,Water Demand\n");
+            writer.write("City Name,Population,Pets Population,Apple Demand,Bread Demand,Cucumber Demand,Meat Demand,Potato Demand,Seed Demand,Tomato Demand,Wheat Demand,Water Demand,Potato Crop,Apple Crop,Animal breeding,Cucumber crop,Tomato crop,Wheat crop\n");
 
-            // Write data for each city
-            for (City city : list_of_cities) {
-                writer.write(city.getName() + "," +
-                        city.getPopulation() + "," +
-                        city.getPets_population() + "," +
-                        city.getSum_of_apples() + "," +
-                        city.getSum_of_bread() + "," +
-                        city.getSum_of_cucumbers() + "," +
-                        city.getSum_of_meat() + "," +
-                        city.getSum_of_potatoes() + "," +
-                        city.getSum_of_seeds() + "," +
-                        city.getSum_of_tomatoes() + "," +
-                        city.getSum_of_wheat() + "," +
-                        city.getSum_of_water() + "\n");
-            }
+            // Write data for city
+            writer.write(city.getName() + "," +
+                    city.getPopulation() + "," +
+                    city.getPets_population() + "," +
+                    city.getSum_of_apples() + "," +
+                    city.getSum_of_bread() + "," +
+                    city.getSum_of_cucumbers() + "," +
+                    city.getSum_of_meat() + "," +
+                    city.getSum_of_potatoes() + "," +
+                    city.getSum_of_seeds() + "," +
+                    city.getSum_of_tomatoes() + "," +
+                    city.getSum_of_wheat() + "," +
+                    city.getSum_of_water() + "," +
+                    city.getList_of_crops().get(0).getCrop_area() + "," +
+                    city.getList_of_crops().get(1).getCrop_area() + "," +
+                    city.getList_of_crops().get(2).getCrop_area() + "," +
+                    city.getList_of_crops().get(3).getCrop_area() + "," +
+                    city.getList_of_crops().get(4).getCrop_area() + "," +
+                    city.getList_of_crops().get(5).getCrop_area() + "\n");
+
 
             System.out.println("Dane zostały wyeksportowane do " + filename);
         } catch (IOException e) {
             System.err.println("Wystąpił błąd podczas zapisu do pliku CSV: " + e.getMessage());
         }
     }
+
+    public void export_city_statistics_to_csv(String filename, City city) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
+
+            // Write data for city
+            writer.write( " ," +
+                    city.getPopulation() + "," +
+                    city.getPets_population() + "," +
+                    city.getSum_of_apples() + "," +
+                    city.getSum_of_bread() + "," +
+                    city.getSum_of_cucumbers() + "," +
+                    city.getSum_of_meat() + "," +
+                    city.getSum_of_potatoes() + "," +
+                    city.getSum_of_seeds() + "," +
+                    city.getSum_of_tomatoes() + "," +
+                    city.getSum_of_wheat() + "," +
+                    city.getSum_of_water() + "," +
+                    city.getList_of_crops().get(0).getCrop_area() + "," +
+                    city.getList_of_crops().get(1).getCrop_area() + "," +
+                    city.getList_of_crops().get(2).getCrop_area() + "," +
+                    city.getList_of_crops().get(3).getCrop_area() + "," +
+                    city.getList_of_crops().get(4).getCrop_area() + "," +
+                    city.getList_of_crops().get(5).getCrop_area()+ "\n");
+
+            System.out.println("Dane zostały wyeksportowane do " + filename);
+        } catch (IOException e) {
+            System.err.println("Wystąpił błąd podczas zapisu do pliku CSV: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         Simulation s = new Simulation();
 
@@ -162,4 +199,4 @@ public class Simulation {
 
 // do zrobienia menu miasta
 // do zrobienia export do csv
-
+//testy jednostkowe
