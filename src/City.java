@@ -78,67 +78,6 @@ public class City {
         return city;
     }
 
-    public ArrayList<Crops> getList_of_crops() {
-        return list_of_crops;
-    }
-
-    public ArrayList<Pet> getList_of_pets() {
-        return list_of_pets;
-    }
-
-    public ArrayList<Person> getList_of_residents() {
-        return list_of_residents;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getPopulation() {
-        return population;
-    }
-
-    public int getPets_population() {
-        return pets_population;
-    }
-
-    public double getSum_of_apples() {
-        return sum_of_apples;
-    }
-
-    public double getSum_of_bread() {
-        return sum_of_bread;
-    }
-
-    public double getSum_of_cucumbers() {
-        return sum_of_cucumbers;
-    }
-
-    public double getSum_of_meat() {
-        return sum_of_meat;
-    }
-
-    public double getSum_of_potatoes() {
-        return sum_of_potatoes;
-    }
-
-    public double getSum_of_seeds() {
-        return sum_of_seeds;
-    }
-
-    public double getSum_of_tomatoes() {
-        return sum_of_tomatoes;
-    }
-
-    public double getSum_of_water() {
-        return sum_of_water;
-    }
-
-    public double getSum_of_wheat(){
-        return sum_of_wheat;
-    }
-
-
     public void generate_residents(){
         double people_max = 3.5;
         double people_min = 1.4;
@@ -379,5 +318,93 @@ public class City {
                 System.out.println("Niestety Twoje miasto spotkał niezwykle rzadki pech i zostało ono trafione przez asteroidę! Wszyscy zgineli!");
             }
         }
+    }
+
+    public ArrayList<Crops> getList_of_crops() {
+        return list_of_crops;
+    }
+
+    public ArrayList<Pet> getList_of_pets() {
+        return list_of_pets;
+    }
+
+    public ArrayList<Person> getList_of_residents() {
+        return list_of_residents;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public int getPets_population() {
+        return pets_population;
+    }
+
+    public double getSum_of_apples() {
+        return sum_of_apples;
+    }
+
+    public double getSum_of_bread() {
+        return sum_of_bread;
+    }
+
+    public double getSum_of_cucumbers() {
+        return sum_of_cucumbers;
+    }
+
+    public double getSum_of_meat() {
+        return sum_of_meat;
+    }
+
+    public double getSum_of_potatoes() {
+        return sum_of_potatoes;
+    }
+
+    public double getSum_of_seeds() {
+        return sum_of_seeds;
+    }
+
+    public double getSum_of_tomatoes() {
+        return sum_of_tomatoes;
+    }
+
+    public double getSum_of_water() {
+        return sum_of_water;
+    }
+
+    public double getSum_of_wheat(){
+        return sum_of_wheat;
+    }
+
+    public void setChild_death_chance(double child_death_chance) {
+        this.child_death_chance = child_death_chance;
+    }
+
+    public void setAdult_death_chance(double adult_death_chance) {
+        this.adult_death_chance = adult_death_chance;
+    }
+
+    public void setSenior_death_chance(double senior_death_chance) {
+        this.senior_death_chance = senior_death_chance;
+    }
+
+    public void setOld_death_chance(double old_death_chance) {
+        this.old_death_chance = old_death_chance;
+    }
+
+    public void setBirth_rate(double birth_rate) {
+        this.birth_rate = birth_rate;
+    }
+
+    public void setAnimal_birth_rate(double animal_birth_rate) {
+        this.animal_birth_rate = animal_birth_rate;
+    }
+
+    public void setNatural_disaster_chance(double natural_disaster_chance) {
+        this.natural_disaster_chance = natural_disaster_chance;
     }
 }
