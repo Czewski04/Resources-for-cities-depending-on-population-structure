@@ -282,29 +282,38 @@ public class City {
         double random_event = Math.random()*(1000)/10;
         if(random_event<=natural_disaster_chance){
             int population_before_disaster = this.population;
+            int pets_population_before_disaster = this.pets_population;
             random_event = Math.random()*(1000)/10;
             if(random_event<10){
                 this.population = (int)Math.round(this.population*0.5);
+                this.pets_population = (int)Math.round(this.pets_population*0.5);
                 System.out.println("Twoje miasto zostało zdziesiątkowane przez epidemię! Utraciłeś/aś 50% mieszkańców");
             }
             else if(random_event<33.33){
                 this.population = (int)Math.round(this.population*0.6666);
+                this.pets_population = (int)Math.round(this.pets_population*0.6666);
                 System.out.println("Twoje miasto na sktuek konfliktu zbrojnego utraciło 33% mieszkańców!");
             }
             else if(random_event<63.33){
                 this.population = (int)Math.round(this.population*0.8);
+                this.pets_population = (int)Math.round(this.pets_population*0.8);
                 System.out.println("Na skutek wybuchu wulkanu utraciłeś/łaś 20% mieszkańców!");
             }
             else if(random_event<99){
                 this.population = (int)Math.round(this.population*0.9);
+                this.pets_population = (int)Math.round(this.pets_population*0.9);
                 System.out.println("Twoje miasto straciło 10% mieszkańców w wyniku huraganu!");
             }
             else {
                 this.population = 0;
+                this.pets_population = 0;
                 System.out.println("Niestety Twoje miasto spotkał niezwykle rzadki pech i zostało ono trafione przez asteroidę! Wszyscy zgineli!");
             }
             for(int i = 0; i<population_before_disaster-this.population; i++){
                 list_of_residents.remove((int)Math.random()*(list_of_residents.size()-1));
+            }
+            for(int i = 0; i<pets_population_before_disaster-this.population; i++){
+                list_of_residents.remove((int)Math.random()*(list_of_pets.size()-1));
             }
         }
     }
