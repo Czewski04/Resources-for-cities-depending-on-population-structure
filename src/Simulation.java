@@ -188,6 +188,8 @@ public class Simulation {
 
             writer.write( " ," +
                     city.getPopulation() + "," +
+                    city.number_of_women() + "," +
+                    city.number_of_men() + "," +
                     city.getPets_population() + "," +
                     city.getSum_of_apples() + "," +
                     city.getSum_of_bread() + "," +
