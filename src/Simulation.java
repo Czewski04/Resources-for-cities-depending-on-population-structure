@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Simulation {
     public int time;
-    public ArrayList<City> list_of_cities = new ArrayList<City>();
+    public ArrayList<City> list_of_cities = new ArrayList<>();
 
     public void show_crop_area(City city) {
         for (Crops crop : city.getList_of_crops()) {
@@ -55,8 +55,8 @@ public class Simulation {
 
     public boolean time_progress(){
         Scanner reading = new Scanner(System.in);
-        int progress = 0;
-        int decision = 0;
+        int progress;
+        int decision;
         while (true){
             if(list_of_cities_is_empty_check()) break;
 
@@ -143,7 +143,7 @@ public class Simulation {
     public boolean city_is_empty_check(City city){
         if (city.getPopulation() == 0){
             System.out.println("Miasto " + city.getName() + " zostało usunięte z powodu braku mieszkańców!");
-            list_of_cities.remove(list_of_cities.indexOf(city));
+            list_of_cities.remove(city);
             return true;
         }
         else return false;

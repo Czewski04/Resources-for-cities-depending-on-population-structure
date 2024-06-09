@@ -14,13 +14,12 @@ import Crops.Tomato_crops;
 import Crops.Wheat_crops;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class City {
     private String name;
     private int population;
     private int pets_population;
-    private ArrayList<Person> list_of_residents = new ArrayList<Person>();
+    private ArrayList<Person> list_of_residents = new ArrayList<>();
     private ArrayList<Pet> list_of_pets = new ArrayList<>();
     private ArrayList<Crops> list_of_crops = new ArrayList<>();
     private double sum_of_potatoes;
@@ -162,21 +161,25 @@ public class City {
             if(list_of_residents.get(i).getAge()<20){
                 if((Math.random()*(1000))/10<this.child_death_chance){
                     list_of_residents.remove(i);
+                    i--;
                 }
             }
             else if(list_of_residents.get(i).getAge()<70){
                 if((Math.random()*(1000))/10<this.adult_death_chance){
                     list_of_residents.remove(i);
+                    i--;
                 }
             }
             else if(list_of_residents.get(i).getAge()<90){
                 if((Math.random()*(1000))/10<this.senior_death_chance){
                     list_of_residents.remove(i);
+                    i--;
                 }
             }
             else {
                 if ((Math.random() * (1000)) / 10 < this.old_death_chance) {
                     list_of_residents.remove(i);
+                    i--;
                 }
             }
         }
@@ -186,21 +189,25 @@ public class City {
             if(list_of_pets.get(i).getAge()<2){
                 if((Math.random()*(1000))/10 < this.child_death_chance){
                     list_of_pets.remove(i);
+                    i--;
                 }
             }
             else if(list_of_pets.get(i).getAge()<12){
                 if((Math.random()*(1000))/10 < this.adult_death_chance){
                     list_of_pets.remove(i);
+                    i--;
                 }
             }
             else if(list_of_pets.get(i).getAge()<16){
                 if((Math.random()*(1000))/10 < this.senior_death_chance){
                     list_of_pets.remove(i);
+                    i--;
                 }
             }
             else {
                 if ((Math.random() * (1000)) / 10 < this.old_death_chance) {
                     list_of_pets.remove(i);
+                    i--;
                 }
             }
         }
@@ -312,7 +319,7 @@ public class City {
             for(int i = 0; i<population_before_disaster-this.population; i++){
                 list_of_residents.remove((int)Math.random()*(list_of_residents.size()-1));
             }
-            for(int i = 0; i<pets_population_before_disaster-this.population; i++){
+            for(int i = 0; i<pets_population_before_disaster-this.pets_population; i++){
                 list_of_residents.remove((int)Math.random()*(list_of_pets.size()-1));
             }
         }
@@ -392,31 +399,4 @@ public class City {
         return sum_of_wheat;
     }
 
-    public void setChild_death_chance(double child_death_chance) {
-        this.child_death_chance = child_death_chance;
-    }
-
-    public void setAdult_death_chance(double adult_death_chance) {
-        this.adult_death_chance = adult_death_chance;
-    }
-
-    public void setSenior_death_chance(double senior_death_chance) {
-        this.senior_death_chance = senior_death_chance;
-    }
-
-    public void setOld_death_chance(double old_death_chance) {
-        this.old_death_chance = old_death_chance;
-    }
-
-    public void setBirth_rate(double birth_rate) {
-        this.birth_rate = birth_rate;
-    }
-
-    public void setAnimal_birth_rate(double animal_birth_rate) {
-        this.animal_birth_rate = animal_birth_rate;
-    }
-
-    public void setNatural_disaster_chance(double natural_disaster_chance) {
-        this.natural_disaster_chance = natural_disaster_chance;
-    }
 }
