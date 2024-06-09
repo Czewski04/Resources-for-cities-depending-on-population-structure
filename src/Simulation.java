@@ -58,12 +58,25 @@ public class Simulation {
         while (true){
             if(list_of_cities_is_empty_check()) break;
 
-            System.out.println("Jaki okres czasu chcesz dodać: \n0 - Powrót do menu miast");
+            System.out.println("Jaki okres czasu chcesz dodać?(>1): \n0 - Powrót do menu miast\n1 - Zmiana parametrów");
             progress = reading.nextInt();
 
             if(progress == 0) break;
+            else if(progress == 1){
+                System.out.println("Przechodzisz do menu edycji współczynników");
+                System.out.println("Podaj nazwę miasta, którego dane chcesz zmienić:");
+                String cityName = reading.next();
+
+                City city = find_city_by_name(cityName);
+                if (city != null) {
+                    city.changing_city_data();
+                } else {
+                    System.out.println("Miasto o podanej nazwie nie istnieje.");
+                }
+                continue;
+            }
             this.time += progress;
-            for(int j = 0; j<progress; j++){
+            for(int j = 0; j < progress; j++){
                 for(int i = 0; i < list_of_cities.size(); i++){
                     list_of_cities.get(i).Clear();
                     list_of_cities.get(i).Time();
@@ -78,9 +91,17 @@ public class Simulation {
             decision = reading.nextInt();
             if(decision == 1) return true;
             if(decision == 0) break;
-            else System.out.println("Podaj właśiwą liczbę");
+            else System.out.println("Podaj właściwą liczbę");
         }
         return false;
+    }
+    private City find_city_by_name(String city_name){
+        for(City city : list_of_cities){
+            if(city.getName().equals(city_name)){
+                return city;
+            }
+        }
+        return null;
     }
 
     public boolean creating_cities(){
@@ -129,10 +150,9 @@ public class Simulation {
     }
     public void first_export_city_statistics_to_csv(String filename, City city) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
-            // Write CSV header
+
             writer.write("City Name,Population,Pets Population,Apple Demand,Bread Demand,Cucumber Demand,Meat Demand,Potato Demand,Seed Demand,Tomato Demand,Wheat Demand,Water Demand,Potato Crop,Apple Crop,Animal breeding,Cucumber crop,Tomato crop,Wheat crop\n");
 
-            // Write data for city
             writer.write(city.getName() + "," +
                     city.getPopulation() + "," +
                     city.getPets_population() + "," +
@@ -162,7 +182,6 @@ public class Simulation {
     public void export_city_statistics_to_csv(String filename, City city) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
 
-            // Write data for city
             writer.write( " ," +
                     city.getPopulation() + "," +
                     city.getPets_population() + "," +
@@ -187,6 +206,7 @@ public class Simulation {
             System.err.println("Wystąpił błąd podczas zapisu do pliku CSV: " + e.getMessage());
         }
     }
+
 
     public static void main(String[] args) {
         Simulation s = new Simulation();

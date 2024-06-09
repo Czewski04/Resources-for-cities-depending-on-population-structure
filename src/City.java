@@ -64,7 +64,7 @@ public class City {
         System.out.println("Podaj kolejno procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
         double child_death_chance = reading_data.nextDouble();
         double adult_death_chance = reading_data.nextDouble();
-        double senoir_death_chance = reading_data.nextDouble();
+        double senior_death_chance = reading_data.nextDouble();
         double old_death_chance = reading_data.nextDouble();
 
         System.out.println("Podaj kolejno współczynnik urodzień ludzi na 100 mieszkańców oraz współczynnik urodzień zwierząt na 100 mieszkańców ");
@@ -74,8 +74,24 @@ public class City {
         System.out.println("Podaj prawdopodobieństwo wystąpienia klęski żywiołowej: ");
         double natural_disaster_chance = reading_data.nextDouble();
 
-        City city = new City(nazwa_miasta, population, child_death_chance, adult_death_chance, senoir_death_chance, old_death_chance, birth_rate, animal_birth_rate, natural_disaster_chance);
+        City city = new City(nazwa_miasta, population, child_death_chance, adult_death_chance, senior_death_chance, old_death_chance, birth_rate, animal_birth_rate, natural_disaster_chance);
         return city;
+    }
+    public void changing_city_data(){
+        Scanner reading_data = new Scanner(System.in);
+
+        System.out.println("Podaj kolejno nowe procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
+        double child_death_chance = reading_data.nextDouble();
+        double adult_death_chance = reading_data.nextDouble();
+        double senior_death_chance = reading_data.nextDouble();
+        double old_death_chance = reading_data.nextDouble();
+
+        System.out.println("Podaj kolejno nowe współczynnik urodzień ludzi na 100 mieszkańców oraz współczynnik urodzień zwierząt na 100 mieszkańców ");
+        double birth_rate = reading_data.nextDouble();
+        double animal_birth_rate = reading_data.nextDouble();
+
+        System.out.println("Podaj nowe prawdopodobieństwo wystąpienia klęski żywiołowej: ");
+        double natural_disaster_chance = reading_data.nextDouble();
     }
 
     public void generate_residents(){
