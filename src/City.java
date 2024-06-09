@@ -324,6 +324,7 @@ public class City {
             }
         }
     }
+
     public int number_of_women(){
         int women = 0;
         for(Person resident : list_of_residents){
@@ -333,6 +334,7 @@ public class City {
         }
         return women;
     }
+
     public int number_of_men(){
         int men;
         men = this.population - number_of_women();
