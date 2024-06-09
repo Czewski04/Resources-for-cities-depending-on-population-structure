@@ -409,54 +409,106 @@ public class City {
         return list_of_pets;
     }
 
+    /**
+     * Zwraca listę mieszkańców miasta.
+     * @return Lista mieszkańców.
+     */
     public ArrayList<Person> getList_of_residents() {
         return list_of_residents;
     }
 
+    /**
+     * Zwraca nazwę miasta.
+     * @return Nazwa miasta.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Zwraca liczbę ludności w mieście.
+     * @return Liczba ludności.
+     */
     public int getPopulation() {
         return population;
     }
 
+    /**
+     * Zwraca liczbę zwierząt w mieście.
+     * @return Liczba zwierząt.
+     */
     public int getPets_population() {
         return pets_population;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na jabłka.
+     * @return Suma zapotrzebowania na jabłka.
+     */
     public double getSum_of_apples() {
         return sum_of_apples;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na chleb.
+     * @return Suma zapotrzebowania na chleb.
+     */
     public double getSum_of_bread() {
         return sum_of_bread;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na ogórki.
+     * @return Suma zapotrzebowania na ogórki.
+     */
     public double getSum_of_cucumbers() {
         return sum_of_cucumbers;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na mięso.
+     * @return Suma zapotrzebowania na mięso.
+     */
     public double getSum_of_meat() {
         return sum_of_meat;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na ziemniaki.
+     * @return Suma zapotrzebowania na ziemniaki.
+     */
     public double getSum_of_potatoes() {
         return sum_of_potatoes;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na nasiona.
+     * @return Suma zapotrzebowania na nasiona.
+     */
     public double getSum_of_seeds() {
         return sum_of_seeds;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na pomidory.
+     * @return Suma zapotrzebowania na pomidory.
+     */
     public double getSum_of_tomatoes() {
         return sum_of_tomatoes;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na wodę.
+     * @return Suma zapotrzebowania na wodę.
+     */
     public double getSum_of_water() {
         return sum_of_water;
     }
 
+    /**
+     * Zwraca sumę zapotrzebowania na pszenicę.
+     * @return Suma zapotrzebowania na pszenicę.
+     */
     public double getSum_of_wheat(){
         return sum_of_wheat;
     }
