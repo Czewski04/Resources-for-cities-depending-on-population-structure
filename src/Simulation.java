@@ -58,9 +58,10 @@ public class Simulation {
         while (true){
             if(list_of_cities_is_empty_check()) break;
 
-            System.out.println("Jaki okres czasu chcesz dodać: ");
+            System.out.println("Jaki okres czasu chcesz dodać: \n0 - Powrót do menu miast");
             progress = reading.nextInt();
 
+            if(progress == 0) break;
             this.time += progress;
             for(int j = 0; j<progress; j++){
                 for(int i = 0; i < list_of_cities.size(); i++){
@@ -72,11 +73,11 @@ public class Simulation {
                 }
             }
         }
-        while (true){
-            System.out.println("Chcesz przejść do tworzenia kolejnych miast, czy zakończyć program? \n1 - Twórz miasta \n2-Zakończ program");
+        while (true){   //tutaj potrzebujemy kolejne opcji do przeniesiania nas do menu w którym będizemy mogli edytować współczynniki w trakcie pracy programy
+            System.out.println("Chcesz przejść do tworzenia kolejnych miast, czy zakończyć program? \n1 - Twórz miasta \n0 - Zakończ program");
             decision = reading.nextInt();
             if(decision == 1) return true;
-            if(decision == 2) break;
+            if(decision == 0) break;
             else System.out.println("Podaj właśiwą liczbę");
         }
         return false;
@@ -198,5 +199,4 @@ public class Simulation {
 }
 
 // do zrobienia menu miasta
-// do zrobienia export do csv
 //testy jednostkowe
