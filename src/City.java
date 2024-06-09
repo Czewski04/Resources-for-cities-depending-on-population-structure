@@ -393,10 +393,18 @@ public class City {
         return men;
     }
 
+    /**
+     * Zwraca listę upraw w mieście.
+     * @return Lista upraw.
+     */
     public ArrayList<Crops> getList_of_crops() {
         return list_of_crops;
     }
 
+    /**
+     * Zwraca listę zwierząt w mieście.
+     * @return Lista zwierząt.
+     */
     public ArrayList<Pet> getList_of_pets() {
         return list_of_pets;
     }
