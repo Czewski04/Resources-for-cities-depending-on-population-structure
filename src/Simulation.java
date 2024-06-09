@@ -290,9 +290,22 @@ public class Simulation {
 
         city.setting_city_data(child_death_chance, adult_death_chance, senior_death_chance, old_death_chance, birth_rate, animal_birth_rate, natural_disaster_chance);
     }
+    public void hello(){
+        System.out.println("Witamy w naszej symulacji!\n");
+        System.out.println("Projekt autorstwa: \n" +
+                            "Wiktora Wilczewskiego oraz Alicji Matłok\n");
+        System.out.println("W naszej symulacji możesz tworzyć nowe miasta, nadawać im nazwy " +
+                           "\ni sam wybierać wartości podanych parametry.");
+        System.out.println("Symulacja ta bierze pod uwagę zmieniającą się liczbę ludności w czasie " +
+                           "\ni dostosowuje alokację zasobów, takich jak woda, żywność i inne, aby zaspokoić potrzeby mieszkańców.");
+        System.out.println("Program uwzględnia również różne scenariusze, takie jak zmiany klimatyczne lub " +
+                            "\nklęski żywiołowe które mogą wpływać na życie mieszkańców.\n");
+        System.out.println("Wszystkie dane miast są przesyłane do CVS do późnijszego wglądu.\n");
+    }
 
     public static void main(String[] args) {
         Simulation s = new Simulation();
+        s.hello();
 
         do{
             if(s.creating_cities()) break;
