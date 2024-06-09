@@ -45,6 +45,8 @@ public class Simulation {
     public void show_city_statistics(City city){
         System.out.println("\nOto statystyki miasta " + city.getName());
         System.out.println("Populacja " + city.getPopulation());
+        System.out.println("Liczba kobiet: " + city.number_of_women());
+        System.out.println("Liczba mężczyzn: " + city.number_of_men());
         System.out.println("Populacja zwierząt " + city.getPets_population());
         show_crop_area(city);
         show_food_demand(city);
@@ -151,10 +153,12 @@ public class Simulation {
     public void first_export_city_statistics_to_csv(String filename, City city) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
 
-            writer.write("City Name,Population,Pets Population,Apple Demand,Bread Demand,Cucumber Demand,Meat Demand,Potato Demand,Seed Demand,Tomato Demand,Wheat Demand,Water Demand,Potato Crop,Apple Crop,Animal breeding,Cucumber crop,Tomato crop,Wheat crop\n");
+            writer.write("City Name,Population,Women,Men,Pets Population,Apple Demand,Bread Demand,Cucumber Demand,Meat Demand,Potato Demand,Seed Demand,Tomato Demand,Wheat Demand,Water Demand,Potato Crop,Apple Crop,Animal breeding,Cucumber crop,Tomato crop,Wheat crop\n");
 
             writer.write(city.getName() + "," +
                     city.getPopulation() + "," +
+                    city.number_of_women() + "," +
+                    city.number_of_men() + "," +
                     city.getPets_population() + "," +
                     city.getSum_of_apples() + "," +
                     city.getSum_of_bread() + "," +

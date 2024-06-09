@@ -341,6 +341,20 @@ public class City {
         }
         System.out.println("po: "+ this.population);
     }
+    public int number_of_women(){
+        int women = 0;
+        for(Person resident : list_of_residents){
+            if(resident instanceof Woman){
+                women++;
+            }
+        }
+        return women;
+    }
+    public int number_of_men(){
+        int men = 0;
+        men = this.population - number_of_women();
+        return men;
+    }
 
     public ArrayList<Crops> getList_of_crops() {
         return list_of_crops;
