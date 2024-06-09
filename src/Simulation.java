@@ -241,7 +241,7 @@ public class Simulation {
         while(tmp){
             Scanner scanner = new Scanner(System.in);
             try{
-                decision = scanner.nextInt();
+                decision = scanner.nextDouble();
                 tmp = false;
             }
             catch(InputMismatchException e){
