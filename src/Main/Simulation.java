@@ -191,7 +191,7 @@ public class Simulation {
      */
     private boolean list_of_cities_is_empty_check(){
         if(list_of_cities.isEmpty()){
-            System.out.println("Twoja lista miast jest pusta! Nie można dalej prowdzaić symulacji!");
+            System.out.println("Twoja lista miast jest pusta! Nie można dalej prowadzić symulacji!");
             return true;
         }
         else return false;
@@ -366,7 +366,7 @@ public class Simulation {
         System.out.println("Projekt autorstwa: \n" +
                             "Wiktora Wilczewskiego oraz Alicji Matłok\n");
         System.out.println("W naszej symulacji możesz tworzyć nowe miasta, nadawać im nazwy " +
-                           "\ni sam wybierać wartości podanych parametry.");
+                           "\ni sam wybierać wartości podanych parametrów.");
         System.out.println("Symulacja ta bierze pod uwagę zmieniającą się liczbę ludności w czasie " +
                            "\ni dostosowuje alokację zasobów, takich jak woda, żywność i inne, aby zaspokoić potrzeby mieszkańców.");
         System.out.println("Program uwzględnia również różne scenariusze, takie jak zmiany klimatyczne lub " +
