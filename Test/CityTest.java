@@ -1,7 +1,6 @@
+import Main.City;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CityTest {
 
@@ -9,9 +8,9 @@ public class CityTest {
     public void born() {
         City city1 = new City("test", 1000, 1,1,1,1,1,1,1);
         City city2 = new City("test", 1000, 1,1,1,1,1,1,1);
-
         city1.generate_residents();
         city2.generate_residents();
+
         city1.born();
 
         Assertions.assertNotEquals(city2.getPopulation(), city1.getPopulation());

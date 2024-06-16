@@ -1,3 +1,5 @@
+package Main;
+
 import Animals.Cat;
 import Animals.Dog;
 import Animals.Pet;
@@ -43,7 +45,7 @@ public class City {
     private double natural_disaster_chance;
 
     /**
-     * Konstruktor klasy City.
+     * Konstruktor klasy main.City.
      */
     public City(String name, int population, double child_death_chance, double adult_death_chance, double senior_death_chance, double old_death_chance, double birth_rate, double animal_birth_rate, double natural_disaster_chance) {
         this.name = name;

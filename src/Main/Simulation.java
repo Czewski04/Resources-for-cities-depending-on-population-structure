@@ -1,5 +1,8 @@
+package Main;
+
 import Crops.Crops;
 import Crops.*;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -18,7 +21,7 @@ public class Simulation {
      * Fukncja wyświetlająca użytkownikowi powierzchnię potrzebną dla każego pola uprawneggo
      * @param city
      */
-    public void show_crop_area(City city) {
+    private void show_crop_area(City city) {
         for (Crops crop : city.getList_of_crops()) {
             if (crop instanceof Potato_crops) {
                 System.out.println("Potrzebna ilość pól uprawnych na ziemniaki: " + crop.getCrop_area());
@@ -40,7 +43,7 @@ public class Simulation {
      * Funkcja wyświetlająca zapotrzebowanie na zasoby danego miasta
      * @param city
      */
-    public void show_food_demand(City city){
+    private void show_food_demand(City city){
         System.out.println("Zapotrzebowanie na jabłka: " + city.getSum_of_apples());
         System.out.println("Zapotrzebowanie na chleb: " + city.getSum_of_bread());
         System.out.println("Zapotrzebowanie na ogórki: " + city.getSum_of_cucumbers());
@@ -56,7 +59,7 @@ public class Simulation {
      * Funkcja wyświetlająca statystyki danego miasta.
      * @param city Miasto, dla którego wyświetlane są statystyki.
      */
-    public void show_city_statistics(City city){
+    private void show_city_statistics(City city){
         System.out.println("\nOto statystyki miasta " + city.getName());
         System.out.println("Populacja " + city.getPopulation());
         System.out.println("Liczba kobiet: " + city.number_of_women());
@@ -71,7 +74,7 @@ public class Simulation {
      * Funkcja postępująca w czasie symulacji.
      * @return true, jeśli użytkownik chce kontynuować symulację, false w przeciwnym przypadku.
      */
-    public boolean time_progress(){
+    private boolean time_progress(){
         Scanner reading = new Scanner(System.in);
         int progress;
         int decision;
@@ -140,7 +143,7 @@ public class Simulation {
      * Funkcja dodająca nowe miasta do listy miast
      * @return ture jeśli użytkownik zakończy program w przeciwnym wypadku false
      */
-    public boolean creating_cities(){
+    private boolean creating_cities(){
         while(true){
             System.out.println("Aktualna liczba miast: " + list_of_cities.size());
             System.out.println("Chcesz stworzyć miasto? \n 1 - tak \n 2 - nie, przejdź do symulacji \n 0 - zakończ program");
@@ -173,7 +176,7 @@ public class Simulation {
      * @param city Miasto do sprawdzenia.
      * @return true, jeśli miasto jest puste, false w przeciwnym przypadku.
      */
-    public boolean city_is_empty_check(City city){
+    private boolean city_is_empty_check(City city){
         if (city.getPopulation() == 0){
             System.out.println("Miasto " + city.getName() + " zostało usunięte z powodu braku mieszkańców!");
             list_of_cities.remove(city);
@@ -186,7 +189,7 @@ public class Simulation {
      * Funkcja sprawdzająca, czy lista miast jest pusta.
      * @return true, jeśli lista miast jest pusta, false w przeciwnym przypadku.
      */
-    public boolean list_of_cities_is_empty_check(){
+    private boolean list_of_cities_is_empty_check(){
         if(list_of_cities.isEmpty()){
             System.out.println("Twoja lista miast jest pusta! Nie można dalej prowdzaić symulacji!");
             return true;
@@ -199,10 +202,10 @@ public class Simulation {
      * @param filename nazwa nowego pliku
      * @param city miasto którego dane są eksportowane
      */
-    public void first_export_city_statistics_to_csv(String filename, City city) {
+    private void first_export_city_statistics_to_csv(String filename, City city) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
 
-            writer.write("City Name,Population,Women,Men,Pets Population,Apple Demand,Bread Demand,Cucumber Demand,Meat Demand,Potato Demand,Seed Demand,Tomato Demand,Wheat Demand,Water Demand,Potato Crop,Apple Crop,Animal breeding,Cucumber crop,Tomato crop,Wheat crop\n");
+            writer.write("main.City Name,Population,Women,Men,Pets Population,Apple Demand,Bread Demand,Cucumber Demand,Meat Demand,Potato Demand,Seed Demand,Tomato Demand,Wheat Demand,Water Demand,Potato Crop,Apple Crop,Animal breeding,Cucumber crop,Tomato crop,Wheat crop\n");
 
             writer.write(city.getName() + "," +
                     city.getPopulation() + "," +
@@ -237,7 +240,7 @@ public class Simulation {
      * @param filename Nazwa pliku do zapisu.
      * @param city Miasto, którego statystyki mają zostać zapisane.
      */
-    public void export_city_statistics_to_csv(String filename, City city) {
+    private void export_city_statistics_to_csv(String filename, City city) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             writer.write( " ," +
                     city.getPopulation() + "," +
@@ -270,7 +273,7 @@ public class Simulation {
      * Funkcja pobierająca liczbę całkowitą od użytkownika.
      * @return Wprowadzona liczba całkowita.
      */
-    public static int user_int_input(){
+    private static int user_int_input(){
         int decision = 0;
         boolean tmp = true;
         while(tmp){
@@ -290,7 +293,7 @@ public class Simulation {
      * Funkcja pobierająca liczbę rzeczywistą od użytkownika.
      * @return Wprowadzona liczba rzeczywista.
      */
-    public static double user_double_input(){
+    private static double user_double_input(){
         double decision = 0;
         boolean tmp = true;
         while(tmp){
@@ -310,7 +313,7 @@ public class Simulation {
      * Funkcja tworząca nowe miasta poprzez pobieranie danych od użytkownika.
      * @return Nowo utworzone miasto.
      */
-    public City getting_city_data() {
+    private City getting_city_data() {
         Scanner reading_data = new Scanner(System.in);
         System.out.println("Podaj nazwę miasta: ");
         String nazwa_miasta = reading_data.nextLine();
@@ -338,7 +341,7 @@ public class Simulation {
      * Funkcja zmieniająca dane miasta na podstawie danych wprowadzonych przez użytkownika.
      * @param city Miasto, którego dane mają być zmienione.
      */
-    public void changing_city_data(City city){
+    private void changing_city_data(City city){
         System.out.println("Podaj kolejno nowe procentowe szansy na: śmierć dziecka < 20 lat; śmierć osoby do 70 roku życia; śmierć osoby do 90 rok życia; śmierc osoby powyżej 90 roku życia:");
         double child_death_chance = user_double_input();
         double adult_death_chance = user_double_input();
@@ -358,7 +361,7 @@ public class Simulation {
     /**
      * Funkcja generująca ekran startowy
      */
-    public void hello(){
+    private void hello(){
         System.out.println("Witamy w naszej symulacji!\n");
         System.out.println("Projekt autorstwa: \n" +
                             "Wiktora Wilczewskiego oraz Alicji Matłok\n");
